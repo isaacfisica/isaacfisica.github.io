@@ -2,7 +2,7 @@
   "name": "isaac-link-hub",
   "version": "1.0.0",
   "private": true,
-  "description": "이삭 ISAAC — 물리학 VTuber 싱글페이지 링크 허브 (Next.js · static export → GitHub Pages)",
+  "description": "이삭 ISAAC",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,9 +10,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.2.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "next": "^16.2.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@types/node": "^20.14.2",
