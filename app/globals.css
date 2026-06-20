@@ -89,6 +89,11 @@ body {
   -webkit-backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: 1px solid rgba(28, 34, 48, 0.1);
   font-family: 'Noto Sans KR', system-ui, sans-serif;
+  transition: background 0.45s ease, border-color 0.45s ease;
+}
+html[data-theme='dark'] .nav {
+  background: rgba(8, 14, 24, 0.82);
+  border-bottom-color: rgba(120, 175, 215, 0.12);
 }
 .nav__inner {
   max-width: 980px;
@@ -136,6 +141,12 @@ body {
   font-weight: 600;
   color: #0c8499;
 }
+html[data-theme='dark'] .nav__brand {
+  color: #e9f2f9;
+}
+html[data-theme='dark'] .nav__word em {
+  color: #62ecff;
+}
 
 /* 데스크탑 메뉴 */
 .nav__menu {
@@ -156,6 +167,13 @@ body {
 .nav__link:hover {
   color: #1b2230;
   background: rgba(28, 34, 48, 0.05);
+}
+html[data-theme='dark'] .nav__link {
+  color: #8d9bb1;
+}
+html[data-theme='dark'] .nav__link:hover {
+  color: #e9f2f9;
+  background: rgba(120, 175, 215, 0.08);
 }
 .nav__cta {
   font-family: 'IBM Plex Mono', monospace;
@@ -213,6 +231,13 @@ body {
   outline: 2px solid #16b6d2;
   outline-offset: 2px;
 }
+html[data-theme='dark'] .nav__burger {
+  border-color: rgba(120, 175, 215, 0.2);
+  background: #0f1a2a;
+}
+html[data-theme='dark'] .nav__burger span {
+  background: #e9f2f9;
+}
 
 /* 모바일 드롭다운 */
 .nav__mobile {
@@ -223,6 +248,11 @@ body {
   border-bottom: 1px solid rgba(28, 34, 48, 0.1);
   background: rgba(250, 248, 243, 0.96);
   animation: nav-drop 0.22s ease;
+  transition: background 0.45s ease, border-color 0.45s ease;
+}
+html[data-theme='dark'] .nav__mobile {
+  background: rgba(8, 14, 24, 0.96);
+  border-bottom-color: rgba(120, 175, 215, 0.12);
 }
 @keyframes nav-drop {
   from {
@@ -247,10 +277,62 @@ body {
 .nav__mlink:hover {
   background: rgba(28, 34, 48, 0.05);
 }
+html[data-theme='dark'] .nav__mlink {
+  color: #e9f2f9;
+}
+html[data-theme='dark'] .nav__mlink:hover {
+  background: rgba(120, 175, 215, 0.08);
+}
 .nav__cta--block {
   margin: 6px 0 0;
   text-align: center;
   padding: 12px;
+}
+
+/* 모바일 드롭다운 토글 버튼 */
+.nav__mlink--toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.nav__mlink--toggle svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+
+/* Navbar 토글 — .hub CSS 변수 없이 직접 색상 사용 */
+.nav .toggle {
+  background: #ffffff;
+  border-color: rgba(28, 34, 48, 0.12);
+  box-shadow: 0 1px 2px rgba(28, 34, 48, 0.05);
+}
+.nav .toggle__icon {
+  color: #646c7e;
+}
+.nav .toggle__knob {
+  background: #16b6d2;
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.2), 0 1px 2px rgba(0, 0, 0, 0.28);
+}
+html[data-theme='dark'] .nav .toggle {
+  background: #0f1a2a;
+  border-color: rgba(130, 175, 215, 0.2);
+}
+html[data-theme='dark'] .nav .toggle__icon {
+  color: #8d9bb1;
+}
+html[data-theme='dark'] .nav .toggle__knob {
+  background: #2de2ff;
+  transform: translateX(30px);
+  box-shadow: 0 0 10px rgba(45, 226, 255, 0.32), 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 
 /* 좁은 화면: 메뉴 숨기고 햄버거 노출 */

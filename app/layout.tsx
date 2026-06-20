@@ -3,6 +3,7 @@ import Script from 'next/script';
 import './globals.css';
 import './fx.css';
 import Navbar from '@/components/navbar';
+import { ThemeProvider } from '@/lib/theme-context';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -35,8 +36,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        {/* <Navbar /> */}
-        {children}
+        <ThemeProvider>
+          <Navbar />
+          {children}
+        </ThemeProvider>
         {GA_ID && (
           <>
             <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />

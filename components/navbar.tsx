@@ -1,38 +1,112 @@
-"use client";
+'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { AtomIcon, SunIcon, MoonIcon } from './icons';
+import { useTheme } from '@/lib/theme-context';
 
-function Navbar() {
-  const pathname = usePathname();
-  const isHome = pathname === '/';
-    return (
-        <nav className="navbar">
-            <Link href="/" className={`nav-link ${isHome ? 'active' : ''}`}>
-                <span className="nav-link__icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 9L12 2L21 9V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M9 21V12H15V21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                </span>
-                <span className="nav-link__text">홈</span>
-            </Link>
-            <Link href="/links" className={`nav-link ${pathname.startsWith('/links') ? 'active' : ''}`}>
-                <span className="nav-link__icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 6V18M6 12H18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                </span>
-                <span className="nav-link__text">링크</span>
-            </Link> 
-            <Link href="/about" className={`nav-link ${pathname.startsWith('/about') ? 'active' : ''}`}>
-                <span className="nav-link__icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 6V18M6 12H18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                </span>
-                <span className="nav-link__text">소개</span>
-            </Link> 
-            </nav>
-    );
-}   export default Navbar;
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  // { label: 'YouTube', href: '#' },
+  // { label: '스트리밍', href: '#' },
+  // { label: 'Discord', href: '#' },
+  { label: 'About', href: '/about' },
+];
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const { setTheme, isDark } = useTheme();
+  const themeLabel = isDark
+    ? '검출기 홀 · NIGHT — 클릭하면 라이트'
+    : '연구실 벤치 · DAY — 클릭하면 다크';
+
+  return (
+    <header className="nav">
+      <div className="nav__inner">
+        {/* 브랜드 */}
+        <a className="nav__brand" href="/" aria-label="이삭 ISAAC — 홈">
+          <span className="nav__mark">
+            <AtomIcon />
+          </span>
+          <span className="nav__word">
+            이삭 <em>ISAAC</em>
+          </span>
+        </a>
+
+        {/* 데스크탑 메뉴 */}
+        <nav className="nav__menu" aria-label="주요 메뉴">
+          {navItems.map((item) => (
+            <a className="nav__link" href={item.href} key={item.label}>
+              {item.label}
+            </a>
+          ))}
+          <button
+            type="button"
+            role="switch"
+            aria-checked={isDark}
+            aria-label={themeLabel}
+            title={themeLabel}
+            className="toggle"
+            onClick={() => setTheme(isDark ? 'light' : 'dark')}
+          >
+            <span className="toggle__icon toggle__icon--sun">
+              <SunIcon />
+            </span>
+            <span className="toggle__icon toggle__icon--moon">
+              <MoonIcon />
+            </span>
+            <span className="toggle__knob" />
+          </button>
+        </nav>
+
+        {/* 햄버거 버튼 (좁은 화면) */}
+        <button
+          type="button"
+          className={'nav__burger' + (open ? ' is-open' : '')}
+          aria-label="메뉴 열기"
+          aria-expanded={open}
+          aria-controls="nav-mobile"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
+
+      {/* 모바일 드롭다운 */}
+      <div
+        id="nav-mobile"
+        className={'nav__mobile' + (open ? ' is-open' : '')}
+        hidden={!open}
+      >
+        {navItems.map((item) => (
+          <a
+            className="nav__mlink"
+            href={item.href}
+            key={item.label}
+            onClick={() => setOpen(false)}
+          >
+            {item.label}
+          </a>
+        ))}
+        {/* 모바일에서도 테마 토글 */}
+        <button
+          type="button"
+          role="switch"
+          aria-checked={isDark}
+          aria-label={themeLabel}
+          title={themeLabel}
+          className="nav__mlink nav__mlink--toggle"
+          onClick={() => { setTheme(isDark ? 'light' : 'dark'); setOpen(false); }}
+        >
+          {isDark ? <SunIcon /> : <MoonIcon />}
+          <span>{isDark ? '라이트 모드' : '다크 모드'}</span>
+        </button>
+      </div>
+    </header>
+  );
+}

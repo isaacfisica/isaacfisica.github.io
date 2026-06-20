@@ -11,8 +11,6 @@ import {
 } from '@/lib/data';
 import {
   LinkIcon,
-  SunIcon,
-  MoonIcon,
   AtomIcon,
   ArrowIcon,
   PlusIcon,
@@ -20,16 +18,10 @@ import {
 import PCBBackground from './effects/PCBBackground';
 import ParticleField, { type ParticleFieldHandle } from './effects/ParticleField';
 import FXPanel, { type FXState } from './effects/FXPanel';
-
-type Theme = 'light' | 'dark';
+import { useTheme } from '@/lib/theme-context';
 
 export default function LinkHub() {
-  // 테마는 메모리 상태만 사용(스토리지 없음) → 새로고침 시 라이트로 초기화됩니다.
-  const [theme, setTheme] = useState<Theme>('light');
-  const isDark = theme === 'dark';
-  const themeLabel = isDark
-    ? '검출기 홀 · NIGHT — 클릭하면 라이트'
-    : '연구실 벤치 · DAY — 클릭하면 다크';
+  const { theme, isDark } = useTheme();
 
   // FX 기믹 상태 (런타임 토글)
   const [fx, setFx] = useState<FXState>({
@@ -78,23 +70,6 @@ export default function LinkHub() {
             <span className="rec__dot" />
             {profile.recTag}
           </span>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={isDark}
-            aria-label={themeLabel}
-            title={themeLabel}
-            className="toggle"
-            onClick={() => setTheme(isDark ? 'light' : 'dark')}
-          >
-            <span className="toggle__icon toggle__icon--sun">
-              <SunIcon />
-            </span>
-            <span className="toggle__icon toggle__icon--moon">
-              <MoonIcon />
-            </span>
-            <span className="toggle__knob" />
-          </button>
         </div>
 
         {/* ───────── HERO ───────── */}
