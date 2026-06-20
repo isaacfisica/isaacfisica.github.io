@@ -356,7 +356,7 @@ function makeDecay(x: number, y: number, isDark: boolean): EventObj {
   else if (r < 0.49) ch = chGamma(x, y, now, p);
   else if (r < 0.65) ch = chXi(x, y, now, p);
   else if (r < 0.79) ch = chOmega(x, y, now, p);
-  else if (r < 0.91) ch = chAnnih(x, y, now, p);
+  //else if (r < 0.91) ch = chAnnih(x, y, now, p);
   else ch = chMuon(x, y, now, p);
 
   let maxEnd = 0;
