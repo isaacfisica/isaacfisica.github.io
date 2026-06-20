@@ -4,6 +4,7 @@ const DEFAULT_SIZE: Record<IconName, number> = {
   youtube: 22,
   stream: 22,
   x: 19,
+  twitter: 20,
   discord: 22,
   support: 21,
 };
@@ -31,6 +32,12 @@ export function LinkIcon({ name, size }: { name: IconName; size?: number }) {
       return (
         <svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M17.5 3h3l-7 8 8.2 10h-6.4l-5-6.1L4 21H1l7.5-8.6L.6 3H7l4.5 5.6L17.5 3Zm-1.1 16h1.7L7.7 4.8H5.9L16.4 19Z" />
+        </svg>
+      );
+    case 'twitter':
+      return (
+        <svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.4 1s-2 .9-3.13 1.14A4.48 4.48 0 0 0 11.5 6.5c0 .35.04.7.1 1.03A12.73 12.73 0 0 1 2 2s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
         </svg>
       );
     case 'discord':

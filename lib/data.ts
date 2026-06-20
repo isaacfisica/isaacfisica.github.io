@@ -3,14 +3,14 @@
  *  콘텐츠 데이터 — 거의 모든 수정은 이 파일에서 끝납니다.
  * ────────────────────────────────────────────────────────────────────
  *  ▷ 링크 추가/수정 : links 배열에 항목을 추가하거나 url을 바꾸세요.
- *       icon: youtube | stream | x | discord | support
+ *       icon: youtube | stream | x | twitter | discord | support
  *       새 아이콘이 필요하면 components/icons.tsx 의 LinkIcon에 한 줄 추가.
  *  ▷ 확장 슬롯       : slots 배열 (지금은 '준비 중' placeholder).
  *  ▷ 푸터 소셜       : footerSocials 배열.
  *  ▷ showSlots=false  로 두면 확장 슬롯 섹션이 통째로 숨겨집니다.
  */
 
-export type IconName = 'youtube' | 'stream' | 'x' | 'discord' | 'support';
+export type IconName = 'youtube' | 'stream' | 'x' | 'twitter' | 'discord' | 'support';
 
 export interface LinkItem {
   icon: IconName;
@@ -34,7 +34,7 @@ export interface SocialItem {
 export const links: LinkItem[] = [
 
   { icon: 'stream', label: '라이브 스트리밍', sub: 'CHZZK', url: 'https://chzzk.naver.com/live/271d3c1c873ad6e013f2524ea705045c' }, // 여기에 링크
-  { icon: 'x', label: 'X (트위터)', sub: '@isaacfisica_kr', url: 'https://x.com/isaacfisica_kr' }, // 여기에 링크
+  { icon: 'twitter', label: 'Twitter (X)', sub: '@isaacfisica_kr', url: 'https://x.com/isaacfisica_kr' }, // 여기에 링크
   { icon: 'youtube', label: 'YouTube', sub: 'Youtube', url: 'https://www.youtube.com/@isaac.fisica' }, // 여기에 링크
   //   //{ icon: 'discord', label: 'Discord', sub: '커뮤니티 서버', url: '#' }, // 여기에 링크
   //{ icon: 'support', label: '후원 · 멤버십', sub: '채널 멤버십 / 슈퍼챗', url: '#' }, // 여기에 링크
@@ -52,7 +52,7 @@ export const slots: SlotItem[] = [
 export const footerSocials: SocialItem[] = [
   { icon: 'youtube', label: 'YouTube', url: 'https://www.youtube.com/@isaac.fisica' },
   { icon: 'stream', label: 'CHZZK', url: 'https://chzzk.naver.com/live/271d3c1c873ad6e013f2524ea705045c' },
-  { icon: 'x', label: 'X', url: 'https://x.com/isaacfisica_kr' },
+  { icon: 'twitter', label: 'Twitter (X)', url: 'https://x.com/isaacfisica_kr' },
   // { icon: 'discord', label: 'Discord', url: '#' },
 ];
 
