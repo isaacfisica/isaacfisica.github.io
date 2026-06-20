@@ -200,6 +200,40 @@ export function EmptyBlock({
 
 /* ─────────── 디자인 시스템 공용 컴포넌트 ─────────── */
 
+/* 표준 카드 컨테이너 — background/border/radius/shadow (.ds-card CSS) */
+export function DSCard({
+  children,
+  style,
+  className,
+}: {
+  children: ReactNode;
+  style?: CSSProperties;
+  className?: string;
+}) {
+  return (
+    <div className={'ds-card' + (className ? ' ' + className : '')} style={style}>
+      {children}
+    </div>
+  );
+}
+
+/* 반응형 그리드 — cols: 2|3|4 (.ds-grid-N CSS) */
+export function DSGrid({
+  cols,
+  children,
+  style,
+}: {
+  cols: 2 | 3 | 4;
+  children: ReactNode;
+  style?: CSSProperties;
+}) {
+  return (
+    <div className={`ds-grid-${cols}`} style={style}>
+      {children}
+    </div>
+  );
+}
+
 /* 아이콘 타일 — 링크 카드의 다크 배경 타일 (link-card__tile CSS 재사용) */
 export function IconTile({ children }: { children: ReactNode }) {
   return (
