@@ -4,6 +4,7 @@ import './globals.css';
 import './fx.css';
 import Navbar from '@/components/navbar';
 import { ThemeProvider } from '@/lib/theme-context';
+import Footer from '@/components/footer';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <Navbar />
           {children}
+          <Footer />
         </ThemeProvider>
         {GA_ID && (
           <>
