@@ -35,7 +35,7 @@ export const links: LinkItem[] = [
 
   { icon: 'stream', label: '라이브 스트리밍', sub: 'CHZZK', url: 'https://chzzk.naver.com/live/271d3c1c873ad6e013f2524ea705045c' }, // 여기에 링크
   { icon: 'x', label: 'X (트위터)', sub: '@isaacfisica_kr', url: 'https://x.com/isaacfisica_kr' }, // 여기에 링크
-  {  icon: 'youtube', label: 'YouTube', sub: 'Youtube', url: 'https://www.youtube.com/@isaac.fisica' }, // 여기에 링크
+  { icon: 'youtube', label: 'YouTube', sub: 'Youtube', url: 'https://www.youtube.com/@isaac.fisica' }, // 여기에 링크
   //   //{ icon: 'discord', label: 'Discord', sub: '커뮤니티 서버', url: '#' }, // 여기에 링크
   //{ icon: 'support', label: '후원 · 멤버십', sub: '채널 멤버십 / 슈퍼챗', url: '#' }, // 여기에 링크
 ];
@@ -65,10 +65,53 @@ export const profile = {
   recTag: 'REC · ISAAC',
   copyright: '© 2025-2026 이삭 ISAAC',
   footnote: 'Character designed by BOOTH 扇屋敷の絵画工房',
+  email: 'isaac.fisica.krNOSPAM[at]gmail.com'
 };
 
 /* 확장 슬롯 섹션 표시 여부 */
 export const showSlots = false;
+
+
+/* ────────────────────────────────────────────────────────────────────
+   About(자기소개) 페이지 콘텐츠 — 블록카드 시스템(lib/blocks.tsx)에서 사용.
+   각 항목 텍스트만 고치면 페이지가 갱신됩니다.
+   ──────────────────────────────────────────────────────────────────── */
+export interface ProfileRowItem {
+  k: string;
+  v: string;
+}
+
+export const about: {
+  quote: string;
+  profile: ProfileRowItem[];
+  likes: string[];
+  dislikes: string[];
+  aims: string;
+  research: string[];
+} = {
+  quote: '',
+  profile: [
+    { k: '이름', v: '이삭' },
+    { k: '전공', v: '실험 핵/입자물리학' },
+    { k: '거주 국가', v: '이탈리아' },
+    { k: '국적', v: '대한민국' },
+    { k: '언어', v: '한국어(MT), 영어(C1), 프랑스어(A1), 이탈리아어, 일본어' },
+    { k: '주요 거점', v: 'MLO NAP GVA SEL PUS' }
+  ],
+  likes: ['에어컨'],
+  dislikes: ['스파게티 부수기', '카페 아메리카노'],
+  aims: "물리학 연구가, 물리학 공부가 어렵지 않다는 것을 보여주는 것을 지향합니다. 물리는 자연에 대한 철학이며, 세상을 바라보는 하나의 관점입니다. 물리학적 지식은 세상을 이해하는데 도움을 줘야할 뿐, 그것을 공부하는 과정에서 고통받지 않도록 그 두려움을 더는 것을 목표로 합니다.",
+  research:
+    [
+      '양자색역학적 상전이 (QCD Phase Transition)',
+      '반도체 기반 방사선 검출기',
+      '고에너지 핵/입자물리실험을 위한 반도체 기초 연구',
+      '암흑물질 탐색을 위한 반도체 기초 연구',
+      '초고속 데이터 수집과 대용량 데이터 처리에 대한 기초 연구',
+      '방사선의 물질 내 반응에 대한 전산모사 (GEANT4)',
+      '한국-이탈리아 및 한국-유럽 국제공동연구',
+    ]
+};
 
 /* ────────────────────────────────────────────────────────────────────
    FX 기믹 기본값 (런타임 패널로 on/off 가능)
