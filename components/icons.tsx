@@ -91,3 +91,196 @@ export function PlusIcon() {
     </svg>
   );
 }
+
+/* ---------- 블록 시스템(lib/blocks.tsx) 라벨 아이콘 ---------- */
+export function UserIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} aria-hidden="true">
+      <circle cx="12" cy="8" r="3.4" />
+      <path d="M5.5 20a6.5 6.5 0 0 1 13 0" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function HeartIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="currentColor" aria-hidden="true">
+      <path d="M12 21s-7.4-4.6-9.6-9A5.1 5.1 0 0 1 12 6.6 5.1 5.1 0 0 1 21.6 12C19.4 16.4 12 21 12 21Z" />
+    </svg>
+  );
+}
+
+export function FrownIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 14s1.2-1.5 4-1.5S16 14 16 14" />
+      <path d="M9 9h.01M15 9h.01" />
+    </svg>
+  );
+}
+
+export function ListIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 5h16M4 10h16M4 15h11M4 20h7" />
+    </svg>
+  );
+}
+
+/* ---------- 확장 블록 아이콘 ---------- */
+
+/** 언어 — 말풍선 */
+export function LanguageIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      <path d="M8 9h1M12 9h4M8 12.5h8" />
+    </svg>
+  );
+}
+
+/** 목표 — 과녁 */
+export function TargetIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+/** 과학·실험 — 플라스크 */
+export function FlaskIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M9 3h6M9 3v6.5L4.5 17A2 2 0 0 0 6.3 20h11.4A2 2 0 0 0 19.5 17L15 9.5V3" />
+      <path d="M7.5 15.5h9" />
+    </svg>
+  );
+}
+
+/** 연구·탐색 — 돋보기 */
+export function SearchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="7" />
+      <path d="m16 16 4.5 4.5" />
+    </svg>
+  );
+}
+
+/** 국제·글로벌 — 지구본 */
+export function GlobeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c-2.5 4-2.5 14 0 18M12 3c2.5 4 2.5 14 0 18" />
+    </svg>
+  );
+}
+
+/** 학습·교육 — 책 */
+export function BookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </svg>
+  );
+}
+
+/** 거점·위치 — 지도 핀 */
+export function MapPinIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 21s-7-7.3-7-11a7 7 0 0 1 14 0c0 3.7-7 11-7 11z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  );
+}
+
+/** 특별·관심 — 별 */
+export function StarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="currentColor" aria-hidden="true">
+      <path d="M12 3 14.2 8.9 20.6 9.2 15.6 13.2 17.3 19.3 12 15.8 6.7 19.3 8.4 13.2 3.4 9.2 9.8 8.9Z" />
+    </svg>
+  );
+}
+
+/** 수상·업적 — 트로피 */
+export function TrophyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M8 21h8M12 17v4" />
+      <path d="M5 3H3v4a4 4 0 0 0 4 4h0M19 3h2v4a4 4 0 0 1-4 4h0" />
+      <path d="M5 3h14v7a7 7 0 0 1-7 7 7 7 0 0 1-7-7V3z" />
+    </svg>
+  );
+}
+
+/** 일정·날짜 — 달력 */
+export function CalendarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="17" rx="2" />
+      <path d="M8 2v4M16 2v4M3 10h18" />
+    </svg>
+  );
+}
+
+/** 게임·취미 — 게임패드 */
+export function GamepadIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M6 11h4M8 9v4M15 12h.01M18 11h.01" />
+      <path d="M4 7h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z" />
+    </svg>
+  );
+}
+
+/** 이메일 — 봉투 */
+export function EmailIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="M2 7l10 7 10-7" />
+    </svg>
+  );
+}
+
+/** 링크·연결 — 체인 */
+export function LinkChainIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+    </svg>
+  );
+}
+
+export const all_icons = [
+  SunIcon,
+  MoonIcon,
+  AtomIcon,
+  ArrowIcon,
+  PlusIcon,
+  UserIcon,
+  HeartIcon,
+  FrownIcon,
+  ListIcon,
+  TargetIcon,
+  FlaskIcon,
+  SearchIcon,
+  GlobeIcon,
+  BookIcon,
+  MapPinIcon,
+  StarIcon,
+  TrophyIcon,
+  CalendarIcon,
+  GamepadIcon,
+  EmailIcon,
+  LinkChainIcon,
+].map((icon) => ({ name: icon.name.replace("Icon", ""), icon }));
