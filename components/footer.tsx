@@ -15,7 +15,7 @@ export function Footer(){
                 </a>
               ))}
             </div>
-            <div className="footer__copy">{profile.copyright} | <a className="link-card__sub" href="/designsystem">Design System</a></div>
+            <div className="footer__copy">{profile.copyright} | <a className="link-card__sub" href="/designsystem">Design System(Webpage)</a></div>
             <div className="footer__sub">{profile.footnote}</div>
           </div>
         </div>
