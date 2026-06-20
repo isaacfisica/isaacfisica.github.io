@@ -97,7 +97,7 @@ export default function DesignSystemPage() {
           }}
         >
           이삭 ISAAC{' '}
-          <span style={{ color: 'var(--accent-text)', fontWeight: 600 }}>디자인 시스템</span>
+          <span style={{ color: 'var(--accent-text)', fontWeight: 600 }}>디자인 시스템 (웹페이지)</span>
         </h1>
         <p style={{ maxWidth: 600, margin: '14px 0 0', fontSize: 15, lineHeight: 1.65, color: 'var(--ink-soft)' }}>
           "실험실 작업대" 무드를 기준으로 제작한  토큰·타이포·컴포넌트 명세.
