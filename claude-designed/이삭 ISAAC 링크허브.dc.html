@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!--
+  이삭 ISAAC — 싱글페이지 링크 허브  ·  "실험실 작업대" 무드
+  ─────────────────────────────────────────────────────────
+  ▷ 링크 추가/수정 : 로직(Component)의 this.links 배열만 고치면 됩니다.
+       { icon, label, sub, url }  ·  icon = youtube | stream | x | discord | support
+       새 아이콘이 필요하면 아래 [LINK CARD]의 sc-if 블록에 SVG 한 개만 추가.
+  ▷ 확장 슬롯       : this.slots 배열로 관리 (지금은 '준비 중' placeholder).
+  ▷ 새 섹션 추가    : [SECTION] 주석 블록을 복사해 <main> 안 원하는 위치에 배치.
+  ▷ 색/폰트/간격    : 상단 <helmet>의 :root / [data-theme="dark"] 변수에서 일괄 관리.
+  ▷ 테마           : 라이트 기본 + 우상단 토글(다크). 메모리 상태만 사용(스토리지 없음).
+-->
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *{ box-sizing:border-box; }
+    body{ margin:0; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+    /* ===== 디자인 토큰 — 라이트(기본): 연구실 벤치 / 실험노트 ===== */
+    :root{
+      --paper:#FAF8F3; --paper-2:#F2EDE3; --card:#FFFFFF; --card-2:#FBF8F2;
+      --grid:rgba(28,34,48,.055); --grid-strong:rgba(28,34,48,.11);
+      --ink:#1B2230; --ink-soft:#646C7E; --border:rgba(28,34,48,.12);
+      --tile:#101826; --tile-ink:#EAF6FA;
+      --cyan:#16B6D2; --accent-text:#0C8499; --glow:rgba(34,211,238,.20);
+      --copper:#AF724A; --mustard:#D49A26;
+      --shadow:0 1px 2px rgba(28,34,48,.05), 0 10px 26px rgba(28,34,48,.055);
+    }
+    /* ===== 다크: 지하 검출기 홀 / 원자로 수조 야간 ===== */
+    [data-theme="dark"]{
+      --paper:#080E18; --paper-2:#0C1420; --card:#0F1A2A; --card-2:#0C1626;
+      --grid:rgba(120,175,215,.055); --grid-strong:rgba(120,175,215,.11);
+      --ink:#E9F2F9; --ink-soft:#8D9BB1; --border:rgba(130,175,215,.16);
+      --tile:#0A1422; --tile-ink:#BCEFFF;
+      --cyan:#2DE2FF; --accent-text:#62ECFF; --glow:rgba(45,226,255,.32);
+      --copper:#D49A6B; --mustard:#E7B33E;
+      --shadow:0 1px 2px rgba(0,0,0,.45), 0 14px 38px rgba(0,0,0,.5);
+    }
+    @keyframes floaty{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-5px) } }
+    @keyframes spin-slow{ to{ transform:rotate(360deg) } }
+  </style>
+</helmet>
+
+<div data-theme="{{ theme }}" style="position:relative; min-height:100vh; overflow:hidden; color:var(--ink); font-family:'Noto Sans KR',system-ui,sans-serif; transition:background-color .45s ease, color .45s ease; background-image:linear-gradient(var(--grid) 1px,transparent 1px), linear-gradient(90deg,var(--grid) 1px,transparent 1px), linear-gradient(var(--grid-strong) 1px,transparent 1px), linear-gradient(90deg,var(--grid-strong) 1px,transparent 1px); background-size:26px 26px,26px 26px,130px 130px,130px 130px; background-color:var(--paper);">
+
+  <!-- 배경 PCB 트레이스 (장식) -->
+  <svg width="180" height="180" viewBox="0 0 160 160" fill="none" stroke="var(--copper)" stroke-width="1.4" style="position:absolute; top:-26px; left:-34px; opacity:.16; pointer-events:none;">
+    <path d="M0 30 H42 L62 50 H112"></path>
+    <path d="M0 72 H30 L56 98 H92 L112 78 H160"></path>
+    <circle cx="112" cy="50" r="3.2" fill="var(--copper)" stroke="none"></circle>
+    <circle cx="92" cy="98" r="3.2" fill="var(--copper)" stroke="none"></circle>
+    <circle cx="112" cy="78" r="2.6" fill="var(--copper)" stroke="none"></circle>
+  </svg>
+  <svg width="180" height="180" viewBox="0 0 160 160" fill="none" stroke="var(--cyan)" stroke-width="1.4" style="position:absolute; bottom:-30px; right:-36px; opacity:.13; pointer-events:none; transform:rotate(180deg);">
+    <path d="M0 30 H42 L62 50 H112"></path>
+    <path d="M0 72 H30 L56 98 H92 L112 78 H160"></path>
+    <circle cx="112" cy="50" r="3.2" fill="var(--cyan)" stroke="none"></circle>
+    <circle cx="92" cy="98" r="3.2" fill="var(--cyan)" stroke="none"></circle>
+  </svg>
+
+  <main style="position:relative; z-index:1; max-width:460px; margin:0 auto; padding:24px 20px 44px;">
+
+    <!-- ============================ [SECTION] TOP BAR ============================ -->
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <span style="display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:var(--ink-soft);">
+        <span style="width:6px; height:6px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--glow);"></span>
+        REC · ISAAC-2026
+      </span>
+      <a href="검출기의%20원리.dc.html" style="display:inline-flex; align-items:center; gap:6px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.04em; color:var(--accent-text); text-decoration:none; padding:5px 11px; border:1px solid var(--border); border-radius:999px; background:var(--card-2); white-space:nowrap;" style-hover="border-color:var(--cyan);" title="입자물리 검출기 원리 보기">검출기의 원리<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+      <button onClick="{{ toggleTheme }}" type="button" role="switch" aria-checked="{{ isDark }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}"
+        style="position:relative; width:64px; height:34px; flex:0 0 auto; border-radius:999px; background:var(--card-2); border:1px solid var(--border); cursor:pointer; padding:0; box-shadow:var(--shadow); transition:background .3s, border-color .3s;"
+        style-focus="outline:2px solid var(--cyan); outline-offset:3px;">
+        <span style="position:absolute; left:9px; top:50%; transform:translateY(-50%); color:var(--ink-soft); display:flex;">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"></circle><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M6.4 17.6 5 19"></path></svg>
+        </span>
+        <span style="position:absolute; right:9px; top:50%; transform:translateY(-50%); color:var(--ink-soft); display:flex;">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path></svg>
+        </span>
+        <span style="position:absolute; top:3px; left:3px; width:26px; height:26px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--glow), 0 1px 2px rgba(0,0,0,.28); transition:transform .3s cubic-bezier(.4,1.25,.5,1); transform:{{ knobTransform }};"></span>
+      </button>
+    </div>
+
+    <!-- ============================ [SECTION] HERO ============================ -->
+    <div style="text-align:center; margin-top:22px;">
+      <!-- 아바타 + 검출기 동심원 -->
+      <div style="position:relative; width:212px; height:212px; margin:0 auto; display:flex; align-items:center; justify-content:center;">
+        <svg width="212" height="212" viewBox="0 0 212 212" fill="none" style="position:absolute; inset:0; animation:spin-slow 90s linear infinite;">
+          <circle cx="106" cy="106" r="100" stroke="var(--grid-strong)" stroke-width="1"></circle>
+          <circle cx="106" cy="106" r="84" stroke="var(--cyan)" stroke-width="1" stroke-opacity=".4" stroke-dasharray="3 7"></circle>
+          <circle cx="106" cy="106" r="68" stroke="var(--copper)" stroke-width="1" stroke-opacity=".34" stroke-dasharray="1 8"></circle>
+        </svg>
+        <div style="position:relative; width:134px; height:134px; animation:floaty 6.5s ease-in-out infinite;">
+          <div style="width:134px; height:134px; border-radius:50%; overflow:hidden; box-shadow:0 0 0 4px var(--card), 0 0 0 5px var(--border), 0 16px 32px var(--glow);">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="isaac-avatar" shape="circle" placeholder="캐릭터 일러스트" hint-size="134px,134px"
+              style="width:134px; height:134px; display:block;"></x-import>
+          </div>
+          <!-- 옷깃 원자(atom) 핀 -->
+          <span style="position:absolute; right:0; bottom:2px; width:36px; height:36px; border-radius:50%; background:var(--card); border:1px solid var(--border); box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center;">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--accent-text)" stroke-width="1.5">
+              <circle cx="12" cy="12" r="1.7" fill="var(--accent-text)"></circle>
+              <ellipse cx="12" cy="12" rx="9" ry="3.6"></ellipse>
+              <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(60 12 12)"></ellipse>
+              <ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(120 12 12)"></ellipse>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <h1 style="font-family:'Sora','Noto Sans KR',sans-serif; font-weight:700; font-size:31px; line-height:1.08; letter-spacing:-.01em; margin:18px 0 0; color:var(--ink);">
+        이삭 <span style="color:var(--accent-text); font-weight:600;">ISAAC</span>
+      </h1>
+      <p style="margin:10px auto 0; max-width:280px; font-size:14.5px; line-height:1.55; color:var(--ink-soft);">이탈리아에서 입자 부수는 물리 VTuber</p>
+      <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:7px; margin-top:15px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.03em; white-space:nowrap; color:var(--ink-soft); padding:5px 11px; border:1px solid var(--border); border-radius:999px; background:var(--card-2);">물리 교양</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.03em; white-space:nowrap; color:var(--ink-soft); padding:5px 11px; border:1px solid var(--border); border-radius:999px; background:var(--card-2);">게임</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.03em; white-space:nowrap; color:var(--ink-soft); padding:5px 11px; border:1px solid var(--border); border-radius:999px; background:var(--card-2);">개그과학</span>
+      </div>
+    </div>
+
+    <!-- 오실로스코프 파형 구분선 -->
+    <svg width="100%" height="26" viewBox="0 0 460 26" preserveAspectRatio="none" style="display:block; margin:26px 0 4px; opacity:.55;">
+      <path d="M0 13 H150 l6 -8 l6 16 l7 -19 l6 19 l6 -8 H212 C 244 13 244 4 274 4 S 318 22 348 13 H460" fill="none" stroke="var(--cyan)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"></path>
+    </svg>
+
+    <!-- ============================ [SECTION] MAIN LINKS ============================ -->
+    <div style="display:flex; align-items:center; gap:10px; margin:18px 2px 14px;">
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--ink-soft);">LINKS</span>
+      <span style="flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent);"></span>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:11px;">
+      <sc-for list="{{ links }}" as="link" hint-placeholder-count="5">
+        <!-- [LINK CARD] -->
+        <a href="{{ link.url }}" target="_blank" rel="noopener"
+          style="display:flex; align-items:center; gap:14px; padding:13px 15px; min-height:66px; background:var(--card); border:1px solid var(--border); border-radius:15px; color:var(--ink); text-decoration:none; box-shadow:var(--shadow); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; position:relative;"
+          style-hover="transform:translateY(-2px); border-color:var(--cyan); box-shadow:0 0 0 1px var(--cyan), 0 12px 30px var(--glow);"
+          style-focus="outline:2px solid var(--cyan); outline-offset:3px;">
+          <span style="position:relative; flex:0 0 auto; width:46px; height:46px; border-radius:12px; background:var(--tile); color:var(--tile-ink); display:flex; align-items:center; justify-content:center;">
+            <span style="position:absolute; top:5px; right:5px; width:4px; height:4px; border-radius:50%; background:var(--cyan); opacity:.65;"></span>
+            <sc-if value="{{ link.isYoutube }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .7 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.3 12 31 31 0 0 0 23 7.5ZM9.8 15.3V8.7l5.7 3.3Z"></path></svg></sc-if>
+            <sc-if value="{{ link.isStream }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="14" height="12" rx="2"></rect><path d="M8.5 10.5 12 12 8.5 13.5z" fill="currentColor" stroke="none"></path><path d="M19.5 8.2c1.3 1.4 1.3 6.2 0 7.6M22 5.6c2.4 2.6 2.4 10.2 0 12.8"></path></svg></sc-if>
+            <sc-if value="{{ link.isX }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M17.5 3h3l-7 8 8.2 10h-6.4l-5-6.1L4 21H1l7.5-8.6L.6 3H7l4.5 5.6L17.5 3Zm-1.1 16h1.7L7.7 4.8H5.9L16.4 19Z"></path></svg></sc-if>
+            <sc-if value="{{ link.isDiscord }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M19.5 5.6A16 16 0 0 0 15.6 4.4l-.2.4a14.8 14.8 0 0 1 3.3 1.3 12.5 12.5 0 0 0-10.8 0A14.8 14.8 0 0 1 11.2 4.8L11 4.4A16 16 0 0 0 7.1 5.6C3.6 10.8 2.7 15.8 3.1 20.8a16.2 16.2 0 0 0 4.9 2.5l.4-.6c-.8-.3-1.5-.6-2.2-1l.5-.4a11.6 11.6 0 0 0 9.9 0l.5.4c-.7.4-1.4.7-2.2 1l.4.6a16.1 16.1 0 0 0 4.9-2.5c.5-5.8-.9-10.7-3.7-15.2ZM9.3 17c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm5.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"></path></svg></sc-if>
+            <sc-if value="{{ link.isSupport }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"><path d="M12 21s-7.4-4.6-9.6-9A5.1 5.1 0 0 1 12 6.6 5.1 5.1 0 0 1 21.6 12C19.4 16.4 12 21 12 21Z"></path></svg></sc-if>
+          </span>
+          <span style="display:flex; flex-direction:column; gap:3px; min-width:0; flex:1;">
+            <span style="font-family:'Sora','Noto Sans KR',sans-serif; font-weight:600; font-size:16px; line-height:1.2;">{{ link.label }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.01em; color:var(--ink-soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ link.sub }}</span>
+          </span>
+          <span style="flex:0 0 auto; color:var(--ink-soft); display:flex;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+          </span>
+        </a>
+      </sc-for>
+    </div>
+
+    <!-- ============================ [SECTION] 확장 슬롯 (준비 중) ============================ -->
+    <sc-if value="{{ showSlots }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <div style="display:flex; align-items:center; gap:10px; margin:26px 2px 14px;">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:var(--ink-soft);">확장 슬롯 · SOON</span>
+          <span style="flex:1; height:1px; background:linear-gradient(90deg,var(--border),transparent);"></span>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:11px;">
+          <sc-for list="{{ slots }}" as="slot" hint-placeholder-count="4">
+            <div style="border:1.5px dashed var(--border); border-radius:15px; padding:14px 15px; min-height:94px; display:flex; flex-direction:column; justify-content:space-between; gap:10px; opacity:.9;">
+              <div style="display:flex; align-items:center; gap:9px;">
+                <span style="flex:0 0 auto; width:26px; height:26px; border-radius:8px; border:1.5px dashed var(--border); display:flex; align-items:center; justify-content:center; color:var(--ink-soft);">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 6v12M6 12h12"></path></svg>
+                </span>
+                <span style="font-family:'Sora','Noto Sans KR',sans-serif; font-weight:600; font-size:13px; color:var(--ink-soft); line-height:1.25;">{{ slot.label }}</span>
+              </div>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.12em; color:var(--ink-soft); display:flex; align-items:center; gap:6px;">
+                <span style="width:5px; height:5px; border-radius:50%; background:var(--mustard);"></span>{{ slot.note }}
+              </span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============================ [SECTION] FOOTER ============================ -->
+    <div style="margin-top:30px;">
+      <svg width="100%" height="14" viewBox="0 0 460 14" preserveAspectRatio="none" style="display:block; opacity:.45;">
+        <path d="M0 7 H180 l5 -4 l5 8 l5 -8 l5 4 H280 C 320 7 320 11 460 7" fill="none" stroke="var(--copper)" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"></path>
+      </svg>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:13px; margin-top:18px;">
+        <div style="display:flex; gap:18px; color:var(--ink-soft);">
+          <a href="#" target="_blank" rel="noopener" aria-label="YouTube" style="color:inherit; display:flex; transition:color .18s ease;" style-hover="color:var(--cyan);"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M23 7.5a3 3 0 0 0-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 0 0 1 7.5 31 31 0 0 0 .7 12 31 31 0 0 0 1 16.5a3 3 0 0 0 2.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 0 0 2.1-2.1A31 31 0 0 0 23.3 12 31 31 0 0 0 23 7.5ZM9.8 15.3V8.7l5.7 3.3Z"></path></svg></a>
+          <a href="#" target="_blank" rel="noopener" aria-label="스트리밍" style="color:inherit; display:flex; transition:color .18s ease;" style-hover="color:var(--cyan);"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="14" height="12" rx="2"></rect><path d="M8.5 10.5 12 12 8.5 13.5z" fill="currentColor" stroke="none"></path><path d="M19.5 8.2c1.3 1.4 1.3 6.2 0 7.6M22 5.6c2.4 2.6 2.4 10.2 0 12.8"></path></svg></a>
+          <a href="#" target="_blank" rel="noopener" aria-label="X" style="color:inherit; display:flex; transition:color .18s ease;" style-hover="color:var(--cyan);"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.5 3h3l-7 8 8.2 10h-6.4l-5-6.1L4 21H1l7.5-8.6L.6 3H7l4.5 5.6L17.5 3Zm-1.1 16h1.7L7.7 4.8H5.9L16.4 19Z"></path></svg></a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Discord" style="color:inherit; display:flex; transition:color .18s ease;" style-hover="color:var(--cyan);"><svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M19.5 5.6A16 16 0 0 0 15.6 4.4l-.2.4a14.8 14.8 0 0 1 3.3 1.3 12.5 12.5 0 0 0-10.8 0A14.8 14.8 0 0 1 11.2 4.8L11 4.4A16 16 0 0 0 7.1 5.6C3.6 10.8 2.7 15.8 3.1 20.8a16.2 16.2 0 0 0 4.9 2.5l.4-.6c-.8-.3-1.5-.6-2.2-1l.5-.4a11.6 11.6 0 0 0 9.9 0l.5.4c-.7.4-1.4.7-2.2 1l.4.6a16.1 16.1 0 0 0 4.9-2.5c.5-5.8-.9-10.7-3.7-15.2ZM9.3 17c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm5.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"></path></svg></a>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.04em; color:var(--ink-soft);">© 2026 이삭 ISAAC</div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.12em; color:var(--ink-soft); opacity:.7;">ORIGINAL CHARACTER CONCEPT</div>
+      </div>
+    </div>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: 440, &quot;height&quot;: 920 },
+  &quot;defaultTheme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;light&quot;, &quot;dark&quot;], &quot;default&quot;: &quot;light&quot;, &quot;tsType&quot;: &quot;'light' | 'dark'&quot; },
+  &quot;showSlots&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot; }
+}">
+class Component extends DCLogic {
+  state = { theme: null };
+
+  /* ===== 링크 데이터 — 이 배열만 고치면 링크가 추가/수정됩니다 =====
+     icon: youtube | stream | x | discord | support  (URL은 "#" 자리표시) */
+  links = [
+    { icon: 'youtube', label: 'YouTube',     sub: '메인 채널 · 물리 교양 + 개그과학', url: '#' }, // 여기에 링크
+    { icon: 'stream',  label: '스트리밍',     sub: 'Twitch · 치지직 라이브',        url: '#' }, // 여기에 링크
+    { icon: 'x',       label: 'X (트위터)',   sub: '@isaac_physics',              url: '#' }, // 여기에 링크
+    { icon: 'discord', label: 'Discord',     sub: '커뮤니티 서버',                 url: '#' }, // 여기에 링크
+    { icon: 'support', label: '후원 · 멤버십', sub: '채널 멤버십 / 슈퍼챗',          url: '#' }, // 여기에 링크
+  ];
+
+  /* ===== 확장 슬롯 (지금은 자리만, 추후 활성화) ===== */
+  slots = [
+    { label: 'Live · 최신 영상', note: '준비 중' },
+    { label: '방송 스케줄',      note: '준비 중' },
+    { label: 'About 이삭',      note: '준비 중' },
+    { label: 'FAQ',            note: '준비 중' },
+  ];
+
+  toggleTheme = () => this.setState((s) => ({
+    theme: (s.theme ?? (this.props.defaultTheme || 'light')) === 'light' ? 'dark' : 'light',
+  }));
+
+  renderVals() {
+    const theme = this.state.theme ?? (this.props.defaultTheme || 'light');
+    const isDark = theme === 'dark';
+    const links = this.links.map((l) => ({
+      ...l,
+      isYoutube: l.icon === 'youtube',
+      isStream:  l.icon === 'stream',
+      isX:       l.icon === 'x',
+      isDiscord: l.icon === 'discord',
+      isSupport: l.icon === 'support',
+    }));
+    return {
+      theme,
+      isDark,
+      themeLabel: isDark ? '검출기 홀 · NIGHT — 클릭하면 라이트' : '연구실 벤치 · DAY — 클릭하면 다크',
+      knobTransform: isDark ? 'translateX(30px)' : 'translateX(0)',
+      showSlots: this.props.showSlots ?? true,
+      links,
+      slots: this.slots,
+      toggleTheme: this.toggleTheme,
+    };
+  }
+}
+</script>
+</body>
+</html>
