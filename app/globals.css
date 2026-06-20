@@ -1,6 +1,6 @@
 /* ============================================================
    이삭 ISAAC — 링크 허브  ·  "실험실 작업대" 무드
-   모든 색/간격 토큰은 .hub 선택자(라이트=기본) / .hub[data-theme="dark"]
+   모든 색/간격 토큰은 :root(라이트=기본) / [data-theme="dark"]
    한 곳에서 관리합니다.
    ============================================================ */
 
@@ -15,10 +15,14 @@ body {
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  transition: background-color 0.45s ease, color 0.45s ease;
 }
 
 /* ---------- 디자인 토큰: 라이트(기본) = 연구실 벤치 / 실험노트 ---------- */
-.hub {
+:root {
   --paper: #faf8f3;
   --paper-2: #f2ede3;
   --card: #ffffff;
@@ -37,25 +41,10 @@ body {
   --copper: #af724a;
   --mustard: #d49a26;
   --shadow: 0 1px 2px rgba(28, 34, 48, 0.05), 0 10px 26px rgba(28, 34, 48, 0.055);
-
-  position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
-  overflow: hidden;
-  color: var(--ink);
-  font-family: 'Noto Sans KR', system-ui, sans-serif;
-  transition: background-color 0.45s ease, color 0.45s ease;
-  background-color: var(--paper);
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-    linear-gradient(var(--grid-strong) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px);
-  background-size: 26px 26px, 26px 26px, 130px 130px, 130px 130px;
 }
 
 /* ---------- 다크 = 지하 검출기 홀 / 원자로 수조 야간 ---------- */
-.hub[data-theme='dark'] {
+[data-theme='dark'] {
   --paper: #080e18;
   --paper-2: #0c1420;
   --card: #0f1a2a;
@@ -77,23 +66,19 @@ body {
 }
 
 /* ============================================================
-   상단 내비게이션 바 (Navbar.tsx) — .hub 바깥(레이아웃)에서 쓰이므로
-   토큰을 따로 가지지 않고 라이트 팔레트 값을 직접 사용합니다.
+   상단 내비게이션 바 (Navbar.tsx)
+   토큰이 :root에 있으므로 CSS 변수를 직접 사용합니다.
    ============================================================ */
 .nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(250, 248, 243, 0.82);
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
   backdrop-filter: saturate(1.4) blur(12px);
   -webkit-backdrop-filter: saturate(1.4) blur(12px);
-  border-bottom: 1px solid rgba(28, 34, 48, 0.1);
+  border-bottom: 1px solid var(--border);
   font-family: 'Noto Sans KR', system-ui, sans-serif;
   transition: background 0.45s ease, border-color 0.45s ease;
-}
-html[data-theme='dark'] .nav {
-  background: rgba(8, 14, 24, 0.82);
-  border-bottom-color: rgba(120, 175, 215, 0.12);
 }
 .nav__inner {
   max-width: 980px;
@@ -112,19 +97,19 @@ html[data-theme='dark'] .nav {
   align-items: center;
   gap: 11px;
   text-decoration: none;
-  color: #1b2230;
+  color: var(--ink);
 }
 .nav__mark {
   width: 34px;
   height: 34px;
   flex: 0 0 auto;
   border-radius: 10px;
-  background: #101826;
-  color: #62ecff;
+  background: var(--tile);
+  color: var(--tile-ink);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 2px rgba(28, 34, 48, 0.05), 0 6px 16px rgba(28, 34, 48, 0.08);
+  box-shadow: var(--shadow);
 }
 .nav__mark svg {
   width: 20px;
@@ -139,13 +124,7 @@ html[data-theme='dark'] .nav {
 .nav__word em {
   font-style: normal;
   font-weight: 600;
-  color: #0c8499;
-}
-html[data-theme='dark'] .nav__brand {
-  color: #e9f2f9;
-}
-html[data-theme='dark'] .nav__word em {
-  color: #62ecff;
+  color: var(--accent-text);
 }
 
 /* 데스크탑 메뉴 */
@@ -158,28 +137,21 @@ html[data-theme='dark'] .nav__word em {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 12px;
   letter-spacing: 0.06em;
-  color: #646c7e;
+  color: var(--ink-soft);
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 9px;
   transition: color 0.18s ease, background 0.18s ease;
 }
 .nav__link:hover {
-  color: #1b2230;
-  background: rgba(28, 34, 48, 0.05);
-}
-html[data-theme='dark'] .nav__link {
-  color: #8d9bb1;
-}
-html[data-theme='dark'] .nav__link:hover {
-  color: #e9f2f9;
-  background: rgba(120, 175, 215, 0.08);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
 }
 .nav__cta {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 12px;
   letter-spacing: 0.06em;
-  color: #0c8499;
+  color: var(--accent-text);
   text-decoration: none;
   padding: 8px 16px;
   margin-left: 6px;
@@ -189,8 +161,8 @@ html[data-theme='dark'] .nav__link:hover {
 }
 .nav__cta:hover {
   color: #fff;
-  background: #16b6d2;
-  box-shadow: 0 0 0 1px #16b6d2, 0 8px 20px rgba(34, 211, 238, 0.25);
+  background: var(--cyan);
+  box-shadow: 0 0 0 1px var(--cyan), 0 8px 20px var(--glow);
 }
 
 /* 햄버거 버튼 */
@@ -199,23 +171,23 @@ html[data-theme='dark'] .nav__link:hover {
   width: 42px;
   height: 42px;
   flex: 0 0 auto;
-  border: 1px solid rgba(28, 34, 48, 0.12);
+  border: 1px solid var(--border);
   border-radius: 11px;
-  background: #fff;
+  background: var(--card);
   cursor: pointer;
   padding: 0;
   align-items: center;
   justify-content: center;
   gap: 5px;
   flex-direction: column;
-  box-shadow: 0 1px 2px rgba(28, 34, 48, 0.05);
+  box-shadow: var(--shadow);
 }
 .nav__burger span {
   display: block;
   width: 18px;
   height: 2px;
   border-radius: 2px;
-  background: #1b2230;
+  background: var(--ink);
   transition: transform 0.25s ease, opacity 0.2s ease;
 }
 .nav__burger.is-open span:nth-child(1) {
@@ -228,15 +200,8 @@ html[data-theme='dark'] .nav__link:hover {
   transform: translateY(-7px) rotate(-45deg);
 }
 .nav__burger:focus-visible {
-  outline: 2px solid #16b6d2;
+  outline: 2px solid var(--cyan);
   outline-offset: 2px;
-}
-html[data-theme='dark'] .nav__burger {
-  border-color: rgba(120, 175, 215, 0.2);
-  background: #0f1a2a;
-}
-html[data-theme='dark'] .nav__burger span {
-  background: #e9f2f9;
 }
 
 /* 모바일 드롭다운 */
@@ -245,14 +210,10 @@ html[data-theme='dark'] .nav__burger span {
   flex-direction: column;
   gap: 4px;
   padding: 8px 16px 16px;
-  border-bottom: 1px solid rgba(28, 34, 48, 0.1);
-  background: rgba(250, 248, 243, 0.96);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--paper) 96%, transparent);
   animation: nav-drop 0.22s ease;
   transition: background 0.45s ease, border-color 0.45s ease;
-}
-html[data-theme='dark'] .nav__mobile {
-  background: rgba(8, 14, 24, 0.96);
-  border-bottom-color: rgba(120, 175, 215, 0.12);
 }
 @keyframes nav-drop {
   from {
@@ -268,20 +229,14 @@ html[data-theme='dark'] .nav__mobile {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 13px;
   letter-spacing: 0.04em;
-  color: #1b2230;
+  color: var(--ink);
   text-decoration: none;
   padding: 12px 12px;
   border-radius: 10px;
   transition: background 0.18s ease;
 }
 .nav__mlink:hover {
-  background: rgba(28, 34, 48, 0.05);
-}
-html[data-theme='dark'] .nav__mlink {
-  color: #e9f2f9;
-}
-html[data-theme='dark'] .nav__mlink:hover {
-  background: rgba(120, 175, 215, 0.08);
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
 }
 .nav__cta--block {
   margin: 6px 0 0;
@@ -309,30 +264,18 @@ html[data-theme='dark'] .nav__mlink:hover {
   flex: 0 0 auto;
 }
 
-/* Navbar 토글 — .hub CSS 변수 없이 직접 색상 사용 */
+/* Navbar 토글 — 토큰 기반으로 자동 대응 */
 .nav .toggle {
-  background: #ffffff;
-  border-color: rgba(28, 34, 48, 0.12);
-  box-shadow: 0 1px 2px rgba(28, 34, 48, 0.05);
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
 }
 .nav .toggle__icon {
-  color: #646c7e;
+  color: var(--ink-soft);
 }
 .nav .toggle__knob {
-  background: #16b6d2;
-  box-shadow: 0 0 10px rgba(34, 211, 238, 0.2), 0 1px 2px rgba(0, 0, 0, 0.28);
-}
-html[data-theme='dark'] .nav .toggle {
-  background: #0f1a2a;
-  border-color: rgba(130, 175, 215, 0.2);
-}
-html[data-theme='dark'] .nav .toggle__icon {
-  color: #8d9bb1;
-}
-html[data-theme='dark'] .nav .toggle__knob {
-  background: #2de2ff;
-  transform: translateX(30px);
-  box-shadow: 0 0 10px rgba(45, 226, 255, 0.32), 0 1px 2px rgba(0, 0, 0, 0.28);
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--glow), 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 
 /* 좁은 화면: 메뉴 숨기고 햄버거 노출 */
@@ -366,6 +309,23 @@ html[data-theme='dark'] .nav .toggle__knob {
   right: -36px;
   opacity: 0.13;
   transform: rotate(180deg);
+}
+
+/* ---------- 허브 컨테이너 ---------- */
+.hub {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  color: var(--ink);
+  transition: background-color 0.45s ease, color 0.45s ease;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(var(--grid-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px);
+  background-size: 26px 26px, 26px 26px, 130px 130px, 130px 130px;
 }
 
 .main {
@@ -442,7 +402,7 @@ html[data-theme='dark'] .nav .toggle__knob {
   box-shadow: 0 0 10px var(--glow), 0 1px 2px rgba(0, 0, 0, 0.28);
   transition: transform 0.3s cubic-bezier(0.4, 1.25, 0.5, 1);
 }
-.hub[data-theme='dark'] .toggle__knob {
+[data-theme='dark'] .toggle__knob {
   transform: translateX(30px);
 }
 
@@ -789,7 +749,6 @@ html[data-theme='dark'] .nav .toggle__knob {
 
 /* ============================================================
    블록 카드 시스템 (lib/blocks.tsx) — About 등 "블록카드식" 페이지
-   .hub[data-theme] 안에서 렌더하면 토큰이 자동 적용됩니다.
    ============================================================ */
 
 /* 작은 알약형 링크(상단 바 등) */
@@ -1015,4 +974,68 @@ html[data-theme='dark'] .nav .toggle__knob {
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--card-2);
+}
+
+/* ============================================================
+   디자인 시스템 유틸리티 클래스 (designsystem/globals.css)
+   ============================================================ */
+
+.ds-link-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.ds-link-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--cyan) !important;
+  box-shadow: 0 0 0 1px var(--cyan), 0 12px 30px var(--glow) !important;
+}
+.ds-pill {
+  transition: border-color 0.18s ease;
+}
+.ds-pill:hover {
+  border-color: var(--cyan) !important;
+}
+
+@media (max-width: 720px) {
+  .ds-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .ds-grid-3 {
+    grid-template-columns: 1fr !important;
+  }
+  .ds-grid-4 {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* 디자인 시스템 섹션 헤더 (번호 + 라벨 + 페이드 라인) */
+.ds-section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.ds-section-head__no {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--accent-text);
+}
+.ds-section-head__label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-soft);
+}
+.ds-section-head__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* 디자인 시스템 카드 레이블 (모노 소문자) */
+.ds-card-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
 }
