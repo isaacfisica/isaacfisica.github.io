@@ -32,10 +32,11 @@ export interface SocialItem {
 
 /* 메인 링크 — url의 "#" 자리에 실제 주소를 넣으세요. */
 export const links: LinkItem[] = [
-  //{  icon: 'youtube', label: 'YouTube', sub: '메인 채널 · 물리 교양 + 개그과학', url: '#' }, // 여기에 링크
-  { icon: 'stream', label: '스트리밍', sub: 'CHZZK', url: 'https://chzzk.naver.com/live/271d3c1c873ad6e013f2524ea705045c' }, // 여기에 링크
+
+  { icon: 'stream', label: '라이브 스트리밍', sub: 'CHZZK', url: 'https://chzzk.naver.com/live/271d3c1c873ad6e013f2524ea705045c' }, // 여기에 링크
   { icon: 'x', label: 'X (트위터)', sub: '@isaacfisica_kr', url: 'https://x.com/isaacfisica_kr' }, // 여기에 링크
-  //{ icon: 'discord', label: 'Discord', sub: '커뮤니티 서버', url: '#' }, // 여기에 링크
+  {  icon: 'youtube', label: 'YouTube', sub: 'Youtube', url: 'https://www.youtube.com/@isaac.fisica' }, // 여기에 링크
+  //   //{ icon: 'discord', label: 'Discord', sub: '커뮤니티 서버', url: '#' }, // 여기에 링크
   //{ icon: 'support', label: '후원 · 멤버십', sub: '채널 멤버십 / 슈퍼챗', url: '#' }, // 여기에 링크
 ];
 
@@ -49,7 +50,7 @@ export const slots: SlotItem[] = [
 
 /* 푸터 소셜 아이콘 줄 */
 export const footerSocials: SocialItem[] = [
-  // { icon: 'youtube', label: 'YouTube', url: '#' },
+  { icon: 'youtube', label: 'YouTube', url: 'https://www.youtube.com/@isaac.fisica' },
   { icon: 'stream', label: 'CHZZK', url: 'https://chzzk.naver.com/live/271d3c1c873ad6e013f2524ea705045c' },
   { icon: 'x', label: 'X', url: 'https://x.com/isaacfisica_kr' },
   // { icon: 'discord', label: 'Discord', url: '#' },
@@ -59,10 +60,10 @@ export const footerSocials: SocialItem[] = [
 export const profile = {
   nameKo: '이삭',
   nameEn: 'ISAAC',
-  tagline: '물리학과 박사과정 // 실험 핵·입자물리학;국제공동연구 // 이탈리아 대학 재학중',
+  tagline: '물리학과 박사과정 // 실험 핵·입자물리학; 국제공동연구 // 이탈리아 대학 재학중',
   chips: ['물리 교양', '게임'],
-  recTag: 'REC · ISAAC-2026',
-  copyright: '© 2026 이삭 ISAAC',
+  recTag: 'REC · ISAAC',
+  copyright: '© 2025-2026 이삭 ISAAC',
   footnote: 'Character designed by BOOTH 扇屋敷の絵画工房',
 };
 
