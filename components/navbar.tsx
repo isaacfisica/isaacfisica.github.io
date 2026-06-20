@@ -14,6 +14,8 @@ const navItems: NavItem[] = [
   // { label: '스트리밍', href: '#' },
   // { label: 'Discord', href: '#' },
   { label: 'About', href: '/about' },
+  { label: 'FAQ', href: '/faq' },
+
 ];
 
 export default function Navbar() {
