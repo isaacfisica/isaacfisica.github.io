@@ -27,6 +27,7 @@ body {
   --grid-strong: rgba(28, 34, 48, 0.11);
   --ink: #1b2230;
   --ink-soft: #646c7e;
+  --ink-faint: #9aa1b0;
   --border: rgba(28, 34, 48, 0.12);
   --tile: #101826;
   --tile-ink: #eaf6fa;
@@ -63,6 +64,7 @@ body {
   --grid-strong: rgba(120, 175, 215, 0.11);
   --ink: #e9f2f9;
   --ink-soft: #8d9bb1;
+  --ink-faint: #5c6b82;
   --border: rgba(130, 175, 215, 0.16);
   --tile: #0a1422;
   --tile-ink: #bcefff;
@@ -72,6 +74,199 @@ body {
   --copper: #d49a6b;
   --mustard: #e7b33e;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 14px 38px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   상단 내비게이션 바 (Navbar.tsx) — .hub 바깥(레이아웃)에서 쓰이므로
+   토큰을 따로 가지지 않고 라이트 팔레트 값을 직접 사용합니다.
+   ============================================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 248, 243, 0.82);
+  backdrop-filter: saturate(1.4) blur(12px);
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid rgba(28, 34, 48, 0.1);
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+}
+.nav__inner {
+  max-width: 980px;
+  margin: 0 auto;
+  height: 60px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 브랜드 */
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  color: #1b2230;
+}
+.nav__mark {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  background: #101826;
+  color: #62ecff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(28, 34, 48, 0.05), 0 6px 16px rgba(28, 34, 48, 0.08);
+}
+.nav__mark svg {
+  width: 20px;
+  height: 20px;
+}
+.nav__word {
+  font-family: 'Sora', 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.nav__word em {
+  font-style: normal;
+  font-weight: 600;
+  color: #0c8499;
+}
+
+/* 데스크탑 메뉴 */
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav__link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #646c7e;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 9px;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+.nav__link:hover {
+  color: #1b2230;
+  background: rgba(28, 34, 48, 0.05);
+}
+.nav__cta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #0c8499;
+  text-decoration: none;
+  padding: 8px 16px;
+  margin-left: 6px;
+  border: 1px solid rgba(22, 182, 210, 0.55);
+  border-radius: 999px;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+.nav__cta:hover {
+  color: #fff;
+  background: #16b6d2;
+  box-shadow: 0 0 0 1px #16b6d2, 0 8px 20px rgba(34, 211, 238, 0.25);
+}
+
+/* 햄버거 버튼 */
+.nav__burger {
+  display: none;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(28, 34, 48, 0.12);
+  border-radius: 11px;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(28, 34, 48, 0.05);
+}
+.nav__burger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: #1b2230;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.nav__burger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav__burger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.nav__burger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+.nav__burger:focus-visible {
+  outline: 2px solid #16b6d2;
+  outline-offset: 2px;
+}
+
+/* 모바일 드롭다운 */
+.nav__mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 16px 16px;
+  border-bottom: 1px solid rgba(28, 34, 48, 0.1);
+  background: rgba(250, 248, 243, 0.96);
+  animation: nav-drop 0.22s ease;
+}
+@keyframes nav-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.nav__mlink {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: #1b2230;
+  text-decoration: none;
+  padding: 12px 12px;
+  border-radius: 10px;
+  transition: background 0.18s ease;
+}
+.nav__mlink:hover {
+  background: rgba(28, 34, 48, 0.05);
+}
+.nav__cta--block {
+  margin: 6px 0 0;
+  text-align: center;
+  padding: 12px;
+}
+
+/* 좁은 화면: 메뉴 숨기고 햄버거 노출 */
+@media (max-width: 720px) {
+  .nav__menu {
+    display: none;
+  }
+  .nav__burger {
+    display: flex;
+  }
+}
+/* 넓은 화면: 모바일 드롭다운 강제 숨김 */
+@media (min-width: 721px) {
+  .nav__mobile {
+    display: none !important;
+  }
 }
 
 /* ---------- 배경 장식 ---------- */
@@ -508,4 +703,234 @@ body {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* ============================================================
+   블록 카드 시스템 (lib/blocks.tsx) — About 등 "블록카드식" 페이지
+   .hub[data-theme] 안에서 렌더하면 토큰이 자동 적용됩니다.
+   ============================================================ */
+
+/* 작은 알약형 링크(상단 바 등) */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--accent-text);
+  text-decoration: none;
+  padding: 5px 11px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card-2);
+  white-space: nowrap;
+  transition: border-color 0.18s ease;
+}
+.pill:hover {
+  border-color: var(--cyan);
+}
+
+/* About 헤더 (작은 아바타 + 메타) */
+.about-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+.about-head__media {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-head__rings {
+  position: absolute;
+  inset: 0;
+  animation: spin-slow 90s linear infinite;
+}
+.about-head__clip {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px var(--card), 0 0 0 4px var(--border), 0 10px 22px var(--glow);
+}
+.about-head__ph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-2);
+}
+.about-head__ph span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+.about-head__eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
+}
+.about-head__name {
+  font-family: 'Sora', 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-size: 27px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 5px 0 0;
+  color: var(--ink);
+}
+.about-head__name em {
+  font-style: normal;
+  color: var(--accent-text);
+  font-weight: 600;
+}
+.about-head__tag {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* ---------- 블록 그리드 + 셸 ---------- */
+.block-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+.block {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.block--full {
+  grid-column: 1 / -1;
+}
+.block--lead {
+  padding: 20px 20px 22px;
+}
+.block--dashed {
+  background: none;
+  border: 1.5px dashed var(--border);
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.block__bar {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 34px;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+}
+.block__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 13px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+}
+.block__label--code {
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  margin-bottom: 11px;
+}
+.block__label-ico {
+  display: flex;
+}
+.block__lead {
+  margin: 0;
+  font-family: 'Sora', 'Noto Sans KR', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.block__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.72;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+.block__empty {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+.block__empty-ico {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  border: 1.5px dashed var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-faint);
+}
+
+/* key-value 테이블 */
+.kv {
+  display: flex;
+  flex-direction: column;
+}
+.kv__row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 9px 0;
+  border-top: 1px solid var(--border);
+}
+.kv__k {
+  flex: 0 0 88px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+.kv__v {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* 태그 묶음 */
+.tagrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.tag {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ink);
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card-2);
 }
