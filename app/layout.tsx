@@ -4,11 +4,11 @@ import './fx.css';
 import Navbar from '@/components/navbar';
 
 export const metadata: Metadata = {
-  title: '이삭 ISAAC — 링크 허브',
-  description: '이탈리아에서 입자 부수는 물리 VTuber, 이삭 ISAAC. 모든 채널·콘텐츠 링크 허브.',
+  title: '이삭 ISAAC',
+  description: '이탈리아 물리학과 대학원생; 실험 핵·입자물리학; 국제공동연구',
   openGraph: {
-    title: '이삭 ISAAC — 링크 허브',
-    description: '이탈리아에서 입자 부수는 물리 VTuber, 이삭 ISAAC.',
+    title: '이삭 ISAAC',
+    description: '이탈리아 물리학과 대학원생; 실험 핵·입자물리학; 국제공동연구 ',
     type: 'website',
   },
 };
