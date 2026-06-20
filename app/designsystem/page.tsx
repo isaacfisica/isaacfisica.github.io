@@ -15,7 +15,7 @@ import {
 const MONO = "'IBM Plex Mono',monospace";
 const SORA = "'Sora','Noto Sans KR',sans-serif";
 
-const ICON_NAMES: IconName[] = ['youtube', 'stream', 'x', 'discord', 'support'];
+const ICON_NAMES: IconName[] = ['youtube', 'stream', 'twitter', 'x', 'discord', 'support'];
 
 export default function DesignSystemPage() {
   const { isDark, setTheme } = useTheme();
