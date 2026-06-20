@@ -4,7 +4,6 @@ import { useRef, useState } from 'react';
 import {
   links,
   slots,
-  footerSocials,
   profile,
   showSlots,
   fxDefaults,
@@ -13,6 +12,7 @@ import {
   LinkIcon,
   AtomIcon,
   ArrowIcon,
+  EmailIcon,
   PlusIcon,
 } from './icons';
 import PCBBackground from './effects/PCBBackground';
@@ -21,7 +21,7 @@ import FXPanel, { type FXState } from './effects/FXPanel';
 import { useTheme } from '@/lib/theme-context';
 
 export default function LinkHub() {
-  const { theme, isDark } = useTheme();
+  const { isDark } = useTheme();
 
   // FX 기믹 상태 (런타임 토글)
   const [fx, setFx] = useState<FXState>({
@@ -44,7 +44,7 @@ export default function LinkHub() {
   };
 
   return (
-    <div className="hub" data-theme={theme}>
+    <div className="hub">
       {/* (1) 전류가 흐르는 PCB 회로 배경 */}
       {fx.pcb && <PCBBackground isDark={isDark} />}
 
@@ -155,6 +155,27 @@ export default function LinkHub() {
             </a>
           ))}
         </div>
+        <div className="section-head">
+          <span>CONTACT</span>
+          <span className="line" />
+        </div>
+        <div className="links">
+          <div className="link-card">
+              <span className="link-card__tile">
+                <span className="dot" />
+                <EmailIcon />
+              </span>
+              <span className="link-card__text">
+                <span className="link-card__label">Email</span>
+                <span className="link-card__sub">{profile.email}</span>
+                <span className="link-card__sub">NOSPAM 을 지우고 입력하십시오</span>
+
+              </span>
+              {/* <span className="link-card__arrow"> */}
+                {/* <ArrowIcon /> */}
+              {/* </span> */}
+            </div>
+        </div>
 
         {/* ───────── 확장 슬롯 (준비 중) ───────── */}
         {showSlots && (
@@ -181,24 +202,6 @@ export default function LinkHub() {
             </div>
           </div>
         )}
-
-        {/* ───────── FOOTER ───────── */}
-        <div className="footer">
-          <svg className="footer__wave" viewBox="0 0 460 14" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0 7 H180 l5 -4 l5 8 l5 -8 l5 4 H280 C 320 7 320 11 460 7" fill="none" stroke="var(--copper)" strokeWidth={1.2} strokeLinejoin="round" strokeLinecap="round" />
-          </svg>
-          <div className="footer__inner">
-            <div className="footer__socials">
-              {footerSocials.map((s) => (
-                <a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.label} key={s.label}>
-                  <LinkIcon name={s.icon} size={18} />
-                </a>
-              ))}
-            </div>
-            <div className="footer__copy">{profile.copyright}</div>
-            <div className="footer__sub">{profile.footnote}</div>
-          </div>
-        </div>
       </main>
 
       {/* (2)(3) 입자 캔버스 오버레이 */}
