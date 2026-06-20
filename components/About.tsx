@@ -81,7 +81,7 @@ export default function About() {
           <TextBlock label="AIMS" accent="mustard" icon={<TargetIcon />}>
             {about.aims}
           </TextBlock>
-          <TextBlock label="RESEARCH" accent="mustard" icon={<StarIcon />}>
+          <TextBlock label="RESEARCH TOPICS" accent="mustard" icon={<StarIcon />}>
             {about.research.map((v, i) => (
               <span key={`research-${i}`}>{v} <br /></span>
             ))}
