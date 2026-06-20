@@ -2,7 +2,7 @@
 
 import type { IconName } from '@/lib/data';
 import { LinkIcon, ArrowIcon, all_icons } from '@/components/icons';
-import { IconTile, DSSectionHead, DSCardLabel } from '@/lib/blocks';
+import { IconTile, DSSectionHead, DSCardLabel, DSCard, DSGrid } from '@/lib/blocks';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useTheme } from '@/lib/theme-context';
 import {
@@ -15,13 +15,6 @@ import {
 const MONO = "'IBM Plex Mono',monospace";
 const SORA = "'Sora','Noto Sans KR',sans-serif";
 
-const cardStyle = {
-  background: 'var(--card)',
-  border: '1px solid var(--border)',
-  borderRadius: 14,
-  boxShadow: 'var(--shadow)',
-} as const;
-
 const ICON_NAMES: IconName[] = ['youtube', 'stream', 'x', 'discord', 'support'];
 
 export default function DesignSystemPage() {
@@ -30,7 +23,6 @@ export default function DesignSystemPage() {
 
   return (
     <div
-      
       style={{
         position: 'relative',
         minHeight: '100vh',
@@ -128,12 +120,9 @@ export default function DesignSystemPage() {
           <DSSectionHead no="01" label="COLOR · 색상 토큰" />
 
           <DSCardLabel style={{ margin: '0 0 12px 2px' }}>▸ 액센트 / 시그널</DSCardLabel>
-          <div
-            className="ds-grid-4"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12 }}
-          >
+          <DSGrid cols={4}>
             {ACCENT_SWATCHES.map((sw) => (
-              <div key={sw.token} style={{ ...cardStyle, overflow: 'hidden' }}>
+              <DSCard key={sw.token} style={{ overflow: 'hidden' }}>
                 <div style={{ height: 78, background: sw.css, position: 'relative' }}>
                   <span
                     style={{
@@ -158,17 +147,14 @@ export default function DesignSystemPage() {
                     {isDark ? sw.dark : sw.light}
                   </div>
                 </div>
-              </div>
+              </DSCard>
             ))}
-          </div>
+          </DSGrid>
 
           <DSCardLabel style={{ margin: '22px 0 12px 2px' }}>▸ 표면 / 텍스트 / 보더</DSCardLabel>
-          <div
-            className="ds-grid-4"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12 }}
-          >
+          <DSGrid cols={4}>
             {SURFACE_SWATCHES.map((sw) => (
-              <div key={sw.token} style={{ ...cardStyle, overflow: 'hidden' }}>
+              <DSCard key={sw.token} style={{ overflow: 'hidden' }}>
                 <div style={{ height: 64, background: sw.css, borderBottom: '1px solid var(--border)' }} />
                 <div style={{ padding: '11px 13px 13px' }}>
                   <div style={{ fontFamily: SORA, fontWeight: 600, fontSize: 13, color: 'var(--ink)' }}>
@@ -178,19 +164,16 @@ export default function DesignSystemPage() {
                     {sw.token}
                   </div>
                 </div>
-              </div>
+              </DSCard>
             ))}
-          </div>
+          </DSGrid>
         </section>
 
         {/* ===================== 02 · 타이포 ===================== */}
         <section style={{ marginTop: 30 }}>
           <DSSectionHead no="02" label="TYPE · 타이포그래피" />
-          <div
-            className="ds-grid-3"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12, marginBottom: 14 }}
-          >
-            <div style={{ ...cardStyle, padding: 18 }}>
+          <DSGrid cols={3} style={{ marginBottom: 14 }}>
+            <DSCard style={{ padding: 18 }}>
               <DSCardLabel>DISPLAY · 제목</DSCardLabel>
               <div
                 style={{
@@ -207,8 +190,8 @@ export default function DesignSystemPage() {
               <div style={{ fontSize: 13, color: 'var(--ink-soft)', lineHeight: 1.6 }}>
                 제목·라벨·강조. 700/600 위주. letter-spacing -.015em.
               </div>
-            </div>
-            <div style={{ ...cardStyle, padding: 18 }}>
+            </DSCard>
+            <DSCard style={{ padding: 18 }}>
               <DSCardLabel>BODY · 본문</DSCardLabel>
               <div
                 style={{
@@ -225,8 +208,8 @@ export default function DesignSystemPage() {
               <div style={{ fontSize: 13, color: 'var(--ink-soft)', lineHeight: 1.6 }}>
                 한글 본문·설명. Noto Sans KR 400/500/700.
               </div>
-            </div>
-            <div style={{ ...cardStyle, padding: 18 }}>
+            </DSCard>
+            <DSCard style={{ padding: 18 }}>
               <DSCardLabel>MONO · 라벨/수치</DSCardLabel>
               <div
                 style={{
@@ -243,10 +226,10 @@ export default function DesignSystemPage() {
               <div style={{ fontSize: 13, color: 'var(--ink-soft)', lineHeight: 1.6 }}>
                 캡션·태그·수치·코드. IBM Plex Mono, 넓은 자간.
               </div>
-            </div>
-          </div>
+            </DSCard>
+          </DSGrid>
 
-          <div style={{ ...cardStyle, padding: '22px 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <DSCard style={{ padding: '22px 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
             {TYPE_SCALE.map((t) => (
               <div
                 key={t.meta}
@@ -274,14 +257,14 @@ export default function DesignSystemPage() {
                 </span>
               </div>
             ))}
-          </div>
+          </DSCard>
         </section>
 
         {/* ===================== 03 · 폼 ===================== */}
         <section style={{ marginTop: 30 }}>
           <DSSectionHead no="03" label="FORM · 라운드 · 그림자 · 그리드" />
-          <div className="ds-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            <div style={{ ...cardStyle, padding: 20 }}>
+          <DSGrid cols={2}>
+            <DSCard style={{ padding: 20 }}>
               <DSCardLabel style={{ marginBottom: 16 }}>RADIUS · 모서리</DSCardLabel>
               <div style={{ display: 'flex', alignItems: 'flex-end', gap: 16, flexWrap: 'wrap' }}>
                 {RADII.map((r) => (
@@ -302,9 +285,9 @@ export default function DesignSystemPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </DSCard>
 
-            <div style={{ ...cardStyle, padding: 20 }}>
+            <DSCard style={{ padding: 20 }}>
               <DSCardLabel style={{ marginBottom: 20 }}>ELEVATION · 그림자 &amp; 글로우</DSCardLabel>
               <div style={{ display: 'flex', gap: 22, alignItems: 'center', flexWrap: 'wrap' }}>
                 <div style={{ textAlign: 'center' }}>
@@ -352,12 +335,11 @@ export default function DesignSystemPage() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </DSCard>
+          </DSGrid>
 
-          <div
+          <DSCard
             style={{
-              ...cardStyle,
               marginTop: 12,
               padding: '18px 20px',
               display: 'flex',
@@ -385,15 +367,15 @@ export default function DesignSystemPage() {
               <br />
               130px 강조 모눈
             </div>
-          </div>
+          </DSCard>
         </section>
 
         {/* ===================== 04 · 컴포넌트 ===================== */}
         <section style={{ marginTop: 30 }}>
           <DSSectionHead no="04" label="COMPONENTS · 컴포넌트" />
-          <div className="ds-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <DSGrid cols={2}>
             {/* 링크 카드 */}
-            <div style={{ ...cardStyle, padding: 20 }}>
+            <DSCard style={{ padding: 20 }}>
               <DSCardLabel style={{ marginBottom: 14 }}>LINK CARD · 링크 카드</DSCardLabel>
               <a
                 href="#"
@@ -425,10 +407,10 @@ export default function DesignSystemPage() {
                 </span>
               </a>
               <DSCardLabel style={{ marginTop: 10 }}>hover → translateY(-2px) + cyan ring + glow</DSCardLabel>
-            </div>
+            </DSCard>
 
             {/* 버튼 / 칩 */}
-            <div style={{ ...cardStyle, padding: 20 }}>
+            <DSCard style={{ padding: 20 }}>
               <DSCardLabel style={{ marginBottom: 14 }}>PILL · 버튼 / 칩 / 태그</DSCardLabel>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
                 <a href="#" className="pill" onClick={(e) => e.preventDefault()}>
@@ -499,10 +481,10 @@ export default function DesignSystemPage() {
                 </span>
               </div>
               <DSCardLabel style={{ marginTop: 12 }}>데이터 칩 = 모노 라벨 + 시그널 도트</DSCardLabel>
-            </div>
+            </DSCard>
 
             {/* 아이콘 타일 */}
-            <div style={{ ...cardStyle, padding: 20 }}>
+            <DSCard style={{ padding: 20 }}>
               <DSCardLabel style={{ marginBottom: 14 }}>ICON TILE · 아이콘</DSCardLabel>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
                 {ICON_NAMES.map((k) => (
@@ -515,10 +497,10 @@ export default function DesignSystemPage() {
                 ))}
               </div>
               <DSCardLabel style={{ marginTop: 14 }}>stroke 1.7 / fill · 22px · 다크 타일 위 시안 도트</DSCardLabel>
-            </div>
+            </DSCard>
 
             {/* 토글 + 섹션 라벨 */}
-            <div style={{ ...cardStyle, padding: 20 }}>
+            <DSCard style={{ padding: 20 }}>
               <DSCardLabel style={{ marginBottom: 16 }}>CONTROLS · 토글 / 구분</DSCardLabel>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
                 <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
@@ -533,21 +515,17 @@ export default function DesignSystemPage() {
                 <span style={{ flex: 1, height: 1, background: 'linear-gradient(90deg,var(--border),transparent)' }} />
               </div>
               <DSCardLabel style={{ marginTop: 8 }}>섹션 라벨: 모노 + 자간 .18em + 페이드 라인</DSCardLabel>
-            </div>
-          </div>
+            </DSCard>
+          </DSGrid>
         </section>
 
         {/* ===================== 05 · 시그니처 장식 ===================== */}
         <section style={{ marginTop: 30 }}>
           <DSSectionHead no="05" label="MOTIFS · 시그니처 장식" />
-          <div
-            className="ds-grid-3"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 12 }}
-          >
+          <DSGrid cols={3}>
             {/* 오실로스코프 파형 */}
-            <div
+            <DSCard
               style={{
-                ...cardStyle,
                 padding: 20,
                 display: 'flex',
                 flexDirection: 'column',
@@ -572,12 +550,11 @@ export default function DesignSystemPage() {
                 />
               </svg>
               <DSCardLabel>섹션 사이 리듬용 · cyan stroke</DSCardLabel>
-            </div>
+            </DSCard>
 
             {/* PCB 트레이스 */}
-            <div
+            <DSCard
               style={{
-                ...cardStyle,
                 padding: 20,
                 display: 'flex',
                 flexDirection: 'column',
@@ -595,12 +572,11 @@ export default function DesignSystemPage() {
                 </svg>
               </div>
               <DSCardLabel>코너 배경 장식 · copper, opacity ~.16</DSCardLabel>
-            </div>
+            </DSCard>
 
             {/* 검출기 동심원 + 원자 */}
-            <div
+            <DSCard
               style={{
-                ...cardStyle,
                 padding: 20,
                 display: 'flex',
                 flexDirection: 'column',
@@ -637,23 +613,25 @@ export default function DesignSystemPage() {
                 </svg>
               </div>
               <DSCardLabel>아바타 링 · 원자 핀 · 90s 회전</DSCardLabel>
-            </div>
-          </div>
+            </DSCard>
+          </DSGrid>
         </section>
+
+        {/* ===================== 06 · 아이콘 ===================== */}
         <section style={{ marginTop: 30 }}>
           <DSSectionHead no="06" label="AVAILABLE ICONS · 사용가능한 아이콘" />
-          <div style={{ ...cardStyle, padding: '22px 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <DSCard style={{ padding: '22px 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-                {all_icons.map((k) => (
-                  <div key={`icon-${k.name}`} style={{ textAlign: 'center' }}>
-                    <IconTile>
-                      {k.icon()}
-                    </IconTile>
-                    <div style={{ fontFamily: MONO, fontSize: 9, color: 'var(--ink-soft)', marginTop: 6 }}>{k.name}</div>
-                  </div>
-                ))}
-              </div>
-          </div>
+              {all_icons.map((k) => (
+                <div key={`icon-${k.name}`} style={{ textAlign: 'center' }}>
+                  <IconTile>
+                    {k.icon()}
+                  </IconTile>
+                  <div style={{ fontFamily: MONO, fontSize: 9, color: 'var(--ink-soft)', marginTop: 6 }}>{k.name}</div>
+                </div>
+              ))}
+            </div>
+          </DSCard>
         </section>
 
         {/* ===================== FOOTER ===================== */}
