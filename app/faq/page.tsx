@@ -29,6 +29,22 @@ export default function(){
         <h1>FAQ (자주 묻는 질문)</h1>
         <BlockGrid>
             <TextBlock >
+            <span style={{ fontWeight: 600, fontSize: 20, color: 'var(--accent-text)'
+                }}>CERN (유럽 핵·입자물리연구소) 가봤어요?</span>
+             <br/>
+             네.<br/>
+             출입권한도 있고, 이메일도 있습니다. 다닌지는 대충 7년 넘었습니다. 심심하면 갑니다.
+          </TextBlock>
+            <TextBlock >
+            <span style={{ fontWeight: 600, fontSize: 20, color: 'var(--accent-text)'
+                }}>외국음식 많이 먹겠네요</span>
+             <br/>
+              한달 식사 중 사먹는건 4번 안쪽인 것 같습니다. 나머지는 집에서 한식해먹습니다.<br/>
+              외식물가는 한국이 더 많이 저렴합니다. 여기서 외식 심플하게 할 돈이면 한국에서 거하게 술먹을 수도 있는듯.<br/>
+              참고로 저는 이재모피자나 파파존스가 좋습니다.<br/><br/>
+              가끔 한식치킨집 가서 참이슬 빨간뚜껑 두병이랑 치킨반마리 먹고 옵니다.
+          </TextBlock>
+            <TextBlock >
                 <span style={{ fontWeight: 600, fontSize: 20, color: 'var(--accent-text)'
                 }}>왜 스파게티를 부수면 안되나요?</span>
                 <br/>
