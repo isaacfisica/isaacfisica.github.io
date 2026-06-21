@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { AtomIcon, SunIcon, MoonIcon } from './icons';
+import { AtomIcon, SunIcon, MoonIcon } from '@/design-system/icons';
 import { useTheme } from '@/lib/theme-context';
 
 interface NavItem {
@@ -10,12 +10,8 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  // { label: 'YouTube', href: '#' },
-  // { label: '스트리밍', href: '#' },
-  // { label: 'Discord', href: '#' },
   { label: 'About', href: '/about' },
   { label: 'FAQ', href: '/faq' },
-
 ];
 
 export default function Navbar() {

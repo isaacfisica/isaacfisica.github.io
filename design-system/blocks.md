@@ -1,6 +1,6 @@
 # blocks.tsx 사용 가이드
 
-`lib/blocks.tsx`는 페이지를 블록카드 방식으로 조립하는 프리셋 컴포넌트 모음입니다.
+`design-system/blocks.tsx`는 페이지를 블록카드 방식으로 조립하는 프리셋 컴포넌트 모음입니다.
 새 페이지를 만들 때 이 컴포넌트들을 조합해 빠르게 레이아웃을 구성할 수 있습니다.
 
 ---
@@ -13,7 +13,7 @@ About 페이지 등 블록카드 배열에 쓰는 **2열 CSS 그리드** 래퍼.
 내부 블록은 `full` prop으로 전체 너비를 차지할 수 있습니다.
 
 ```tsx
-import { BlockGrid } from '@/lib/blocks';
+import { BlockGrid } from '@/design-system/blocks';
 
 <BlockGrid>
   <QuoteBlock>…</QuoteBlock>
@@ -26,7 +26,7 @@ import { BlockGrid } from '@/lib/blocks';
 ### `DSGrid`
 
 **반응형 그리드** — 2·3·4열 레이아웃. 디자인 시스템 뷰어나 콘텐츠 그리드에 사용.
-모바일에서 자동으로 열 수를 줄입니다 (`globals.css` `.ds-grid-N` 클래스 기반).
+모바일에서 자동으로 열 수를 줄입니다 (`design-system/globals.css` `.ds-grid-N` 클래스 기반).
 
 | prop | 타입 | 설명 |
 |------|------|------|
@@ -34,7 +34,7 @@ import { BlockGrid } from '@/lib/blocks';
 | `style` | `CSSProperties` | 추가 스타일 (예: `marginBottom`) |
 
 ```tsx
-import { DSGrid, DSCard } from '@/lib/blocks';
+import { DSGrid, DSCard } from '@/design-system/blocks';
 
 // 4열, 모바일에서 2열
 <DSGrid cols={4}>
@@ -59,7 +59,7 @@ import { DSGrid, DSCard } from '@/lib/blocks';
 | `className` | `string` | 추가 CSS 클래스 |
 
 ```tsx
-import { DSCard } from '@/lib/blocks';
+import { DSCard } from '@/design-system/blocks';
 
 <DSCard style={{ padding: 20 }}>
   내용
@@ -90,7 +90,7 @@ import { DSCard } from '@/lib/blocks';
 | `code` | `boolean` | `false` | 라벨을 `// 주석` 스타일로 렌더 |
 
 ```tsx
-import { Block } from '@/lib/blocks';
+import { Block } from '@/design-system/blocks';
 import { StarIcon } from '@/components/icons';
 
 <Block full bar accent="cyan" label="CUSTOM" icon={<StarIcon />}>
@@ -114,7 +114,7 @@ import { StarIcon } from '@/components/icons';
 **key/value 테이블** — 프로필 정보 나열.
 
 ```tsx
-import { ProfileBlock } from '@/lib/blocks';
+import { ProfileBlock } from '@/design-system/blocks';
 
 <ProfileBlock
   label="PROFILE"
@@ -141,7 +141,7 @@ import { ProfileBlock } from '@/lib/blocks';
 | `full` | `boolean` | `false` | 전체 너비 |
 
 ```tsx
-import { TagBlock } from '@/lib/blocks';
+import { TagBlock } from '@/design-system/blocks';
 import { HeartIcon, FrownIcon } from '@/components/icons';
 
 <TagBlock label="LIKES"    accent="cyan"   icon={<HeartIcon />} tags={['물리', '게임', '음악']} />
@@ -153,7 +153,7 @@ import { HeartIcon, FrownIcon } from '@/components/icons';
 **긴 본문** — 설명·스토리 등 자유 텍스트. 기본 전체 너비.
 
 ```tsx
-import { TextBlock } from '@/lib/blocks';
+import { TextBlock } from '@/design-system/blocks';
 import { ListIcon } from '@/components/icons';
 
 <TextBlock label="AIMS" accent="mustard" icon={<ListIcon />}>
@@ -167,7 +167,7 @@ import { ListIcon } from '@/components/icons';
 **빈 자리표시 블록** — 점선 카드. 아직 채우지 않은 섹션에 사용.
 
 ```tsx
-import { EmptyBlock } from '@/lib/blocks';
+import { EmptyBlock } from '@/design-system/blocks';
 
 <EmptyBlock />
 <EmptyBlock>준비 중인 섹션입니다</EmptyBlock>
@@ -182,7 +182,7 @@ import { EmptyBlock } from '@/lib/blocks';
 링크 카드의 **다크 타일 아이콘 래퍼** — 항상 다크 배경 + 시안 도트.
 
 ```tsx
-import { IconTile } from '@/lib/blocks';
+import { IconTile } from '@/design-system/blocks';
 import { LinkIcon } from '@/components/icons';
 
 <IconTile>
@@ -195,7 +195,7 @@ import { LinkIcon } from '@/components/icons';
 **섹션 헤더** — 번호 + 라벨 + 오른쪽으로 페이드되는 선.
 
 ```tsx
-import { DSSectionHead } from '@/lib/blocks';
+import { DSSectionHead } from '@/design-system/blocks';
 
 <DSSectionHead no="01" label="ABOUT · 소개" />
 <DSSectionHead no="02" label="LINKS · 링크" />
@@ -206,7 +206,7 @@ import { DSSectionHead } from '@/lib/blocks';
 **모노스페이스 캡션** — 카드 내 소제목·설명 라벨.
 
 ```tsx
-import { DSCardLabel } from '@/lib/blocks';
+import { DSCardLabel } from '@/design-system/blocks';
 
 <DSCardLabel>RADIUS · 모서리</DSCardLabel>
 <DSCardLabel style={{ marginBottom: 12 }}>아이콘 목록</DSCardLabel>
@@ -224,7 +224,7 @@ import { DSCardLabel } from '@/lib/blocks';
 import {
   BlockGrid, QuoteBlock, ProfileBlock,
   TagBlock, TextBlock, EmptyBlock,
-} from '@/lib/blocks';
+} from '@/design-system/blocks';
 import { HeartIcon, ListIcon } from '@/components/icons';
 
 export default function MyPage() {
@@ -269,7 +269,7 @@ export default function MyPage() {
 ```tsx
 'use client';
 
-import { DSGrid, DSCard, DSSectionHead, DSCardLabel } from '@/lib/blocks';
+import { DSGrid, DSCard, DSSectionHead, DSCardLabel } from '@/design-system/blocks';
 
 export default function GridPage() {
   const items = ['항목 A', '항목 B', '항목 C', '항목 D'];
@@ -300,10 +300,10 @@ export default function GridPage() {
 
 ## 스타일 참고
 
-- 모든 컴포넌트는 `app/globals.css`의 CSS 변수(토큰)를 사용합니다.
+- 모든 컴포넌트는 `design-system/globals.css`의 CSS 변수(토큰)를 사용합니다.
 - 테마 전환은 `document.documentElement`의 `data-theme` 속성으로 자동 처리됩니다.
-- 새 accent 색이 필요하면 `BlockAccent` 타입과 `ACCENT_VAR` 맵을 `lib/blocks.tsx`에 추가하세요.
-- 블록 스타일은 `globals.css`의 `.block-*` 클래스에 정의되어 있습니다.
-- DS 컴포넌트 스타일은 `globals.css`의 `.ds-*` 클래스에 정의되어 있습니다.
+- 새 accent 색이 필요하면 `BlockAccent` 타입과 `ACCENT_VAR` 맵을 `design-system/blocks.tsx`에 추가하세요.
+- 블록 스타일은 `design-system/globals.css`의 `.block-*` 클래스에 정의되어 있습니다.
+- DS 컴포넌트 스타일은 `design-system/globals.css`의 `.ds-*` 클래스에 정의되어 있습니다.
 
 실제 사용 예시는 [components/About.tsx](../components/About.tsx)와 [app/example/page.tsx](../app/example/page.tsx)를 참고하세요.

@@ -1,6 +1,6 @@
 'use client';
 
-import { SunIcon, MoonIcon } from '@/components/icons';
+import { SunIcon, MoonIcon } from '@/design-system/icons';
 
 interface ThemeToggleProps {
   isDark: boolean;

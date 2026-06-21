@@ -11,7 +11,7 @@ import {
   DSSectionHead,
   DSCardLabel,
   IconTile,
-} from '@/lib/blocks';
+} from '@/design-system/blocks';
 
 export default function(){
     return (
@@ -52,12 +52,20 @@ export default function(){
              에스프레소는 풍미가 있는 쓴맛이 나는 물이지, 아메리카노는 풍미는 저세상 보냈고 그냥 쓴맛만 약간 남은 물입니다. 그러니까 구정물이지 왜먹는지 모르겠습니다. <br/>
              <strong>동네 커피기계에 뽑아도 라바짜가 나오는데 왜 굳이 아메리카노를 먹어야할까요? ㅋㅋ</strong>
           </TextBlock>
-                      <TextBlock >
+          <TextBlock >
             <span style={{ fontWeight: 600, fontSize: 20, color: 'var(--accent-text)'
              }}>진짜로 파인애플 피자 극혐하나요?</span>
              <br/>
                 잘 모르겠긴 한데, 아직 피자가게에서 보지는 못했습니다.<br/>
                 예전에 나폴리에 있던 사람한테 물어봤는데 반쯤 극혐의 말을 하긴 했었습니다. 왜 그랬는지는 기억안남.
+          </TextBlock>
+          <TextBlock >
+            <span style={{ fontWeight: 600, fontSize: 20, color: 'var(--accent-text)'
+             }}>진짜로 크림파스타 안팔아요?</span>
+             <br/>
+                아직 파는 곳 못봤습니다.<br/>
+                먹고 싶을 때에는 제가 집에서 해먹는 편입니다.<br/>
+                아, 까르보나라 스파게티는 팝니다. 그게 일반적으로 아는 크림파스타는 아니고, 다른게 있습니다. 한국에서 까르보나라라고 부르는 크림파스타는, 알프레도라고 부릅니다.
           </TextBlock>
         </BlockGrid>
         </main>

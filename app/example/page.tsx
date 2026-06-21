@@ -3,7 +3,7 @@
  *
  * 이 파일은 새 페이지를 만들 때 참고하는 템플릿입니다.
  * 각 블록 컴포넌트가 어떻게 렌더되는지 실제로 확인할 수 있습니다.
- * 사용 가이드: lib/blocks.md
+ * 사용 가이드: design-system/blocks.md
  */
 
 import {
@@ -18,9 +18,9 @@ import {
   DSSectionHead,
   DSCardLabel,
   IconTile,
-} from '@/lib/blocks';
-import { HeartIcon, FrownIcon, ListIcon, TargetIcon, StarIcon } from '@/components/icons';
-import { LinkIcon } from '@/components/icons';
+} from '@/design-system/blocks';
+import { HeartIcon, FrownIcon, ListIcon, TargetIcon, StarIcon } from '@/design-system/icons';
+import { LinkIcon } from '@/design-system/icons';
 
 export default function ExamplePage() {
   return (
@@ -169,7 +169,7 @@ export default function ExamplePage() {
 
         <footer style={{ marginTop: 48, paddingTop: 20, borderTop: '1px solid var(--border)' }}>
           <p style={{ color: 'var(--ink-faint)', fontSize: 12, fontFamily: "'IBM Plex Mono',monospace" }}>
-            blocks.tsx 예시 페이지 — lib/blocks.md 참고
+            blocks.tsx 예시 페이지 — design-system/blocks.md 참고
           </p>
         </footer>
       </main>

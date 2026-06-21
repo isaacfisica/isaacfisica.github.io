@@ -2,10 +2,10 @@
 
 /**
  * ────────────────────────────────────────────────────────────────────
- *  About(자기소개) 페이지 — lib/blocks.tsx 의 블록카드 컴포넌트로 조립한 예시.
+ *  About(자기소개) 페이지 — design-system/blocks.tsx 의 블록카드 컴포넌트로 조립한 예시.
  *  ▷ 내용 수정   : lib/data.ts 의 `about` 객체만 고치면 됩니다.
  *  ▷ 블록 추가   : 아래 <BlockGrid> 안에 프리셋 블록을 더 넣거나 빼세요.
- *  ▷ 새 블록 종류 : lib/blocks.tsx 의 <Block> 셸로 프리셋을 추가할 수 있습니다.
+ *  ▷ 새 블록 종류 : design-system/blocks.tsx 의 <Block> 셸로 프리셋을 추가할 수 있습니다.
  * ────────────────────────────────────────────────────────────────────
  */
 
@@ -17,7 +17,7 @@ import {
   ListIcon,
   UserIcon,
   StarIcon,
-} from '@/components/icons';
+} from '@/design-system/icons';
 import {
   BlockGrid,
   QuoteBlock,
@@ -25,7 +25,7 @@ import {
   TagBlock,
   TextBlock,
   EmptyBlock,
-} from '@/lib/blocks';
+} from '@/design-system/blocks';
 export default function About() {
   return (
     <div className="hub">

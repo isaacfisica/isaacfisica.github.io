@@ -2,7 +2,7 @@
  * ────────────────────────────────────────────────────────────────────
  *  블록 카드 시스템 — "블록카드식" 페이지(About 등)를 조립하는 프리셋 컴포넌트.
  * ────────────────────────────────────────────────────────────────────
- *  ▷ 스타일      : app/globals.css 의 .block-* 클래스에 미리 정의되어 있습니다.
+ *  ▷ 스타일      : design-system/globals.css 의 .block-* 클래스에 미리 정의되어 있습니다.
  *  ▷ 토큰        : var(--card) 등 테마 토큰을 사용합니다.
  *                 :root 에 정의되어 있으므로 어디서든 동작합니다.
  *  ▷ accent      : 라벨 아이콘/상단 바 색 — 'cyan' | 'copper' | 'mustard' | 'accent'
@@ -21,7 +21,7 @@
  */
 
 import type { ReactNode, CSSProperties } from 'react';
-import { UserIcon, PlusIcon } from '@/components/icons';
+import { UserIcon, PlusIcon } from '@/design-system/icons';
 
 export type BlockAccent = 'cyan' | 'copper' | 'mustard' | 'accent';
 

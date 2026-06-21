@@ -99,7 +99,7 @@ export function PlusIcon() {
   );
 }
 
-/* ---------- 블록 시스템(lib/blocks.tsx) 라벨 아이콘 ---------- */
+/* ---------- 블록 시스템(design-system/blocks.tsx) 라벨 아이콘 ---------- */
 export function UserIcon() {
   return (
     <svg viewBox="0 0 24 24" width={15} height={15} fill="none" stroke="currentColor" strokeWidth={1.6} aria-hidden="true">

@@ -14,7 +14,7 @@ import {
   ArrowIcon,
   EmailIcon,
   PlusIcon,
-} from './icons';
+} from '@/design-system/icons';
 import PCBBackground from './effects/PCBBackground';
 import ParticleField, { type ParticleFieldHandle } from './effects/ParticleField';
 import FXPanel, { type FXState } from './effects/FXPanel';

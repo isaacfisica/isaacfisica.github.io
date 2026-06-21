@@ -1,6 +1,6 @@
 'use client';
 
-import { AtomIcon } from '@/components/icons';
+import { AtomIcon } from '@/design-system/icons';
 
 export interface FXState {
   pcb: boolean;
