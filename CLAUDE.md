@@ -5,7 +5,7 @@
 이삭(Isaac)의 개인 포트폴리오 겸 링크 허브 사이트. 물리학 박사과정생(실험 핵·입자물리학, 이탈리아 대학 재학)의 개인 브랜딩 사이트.
 - **메인 페이지 (`/`)**: 링크 허브 + 물리 테마 시각 효과
 - **About 페이지 (`/about`)**: 블록카드 그리드 레이아웃의 자기소개 페이지
-- **디텍터 페이지 (`/detector`)**: 입자 검출기 원리를 인터랙티브하게 설명하는 교육 도구
+- **FAQ 페이지 (`/faq`)**: 자주 묻는 질문 페이지 (블록카드 시스템 사용)
 - **배포**: GitHub Pages (isaacfisica.github.io), 정적 Next.js export
 
 ---
@@ -27,35 +27,35 @@
 isaac-fisica-kr/
 ├── app/
 │   ├── layout.tsx        # 루트 레이아웃 (GA 스크립트, 폰트, Navbar 포함)
-│   ├── globals.css       # 디자인 토큰(:root) + 전체 레이아웃 스타일 + DS 유틸리티 클래스
-│   ├── fx.css            # 이펙트 패널 + 캔버스 오버레이 스타일
 │   ├── page.tsx          # 홈 → LinkHub 컴포넌트 렌더
 │   ├── about/
 │   │   └── page.tsx      # /about 라우트 → About 컴포넌트 렌더
-│   ├── detector/
-│   │   └── page.tsx      # /detector 라우트 → DetectorPage 컴포넌트 렌더
+│   ├── faq/
+│   │   └── page.tsx      # /faq 라우트 — 자주 묻는 질문 (블록카드 시스템 사용)
 │   ├── designsystem/
 │   │   └── page.tsx      # /designsystem 라우트 — 색상·타이포·컴포넌트 명세 뷰어
 │   └── example/
 │       └── page.tsx      # /example 라우트 — blocks.tsx 모든 컴포넌트 사용 예시 (개발 참고용)
 ├── components/
-│   ├── navbar.tsx        # 상단 네비게이션 (모바일: 햄버거, 데스크탑: 메뉴 + 테마 토글)
-│   ├── ThemeToggle.tsx   # 재사용 가능한 테마 토글 버튼 (isDark + onToggle props)
 │   ├── About.tsx         # /about 페이지 — 블록카드 그리드 자기소개
 │   ├── LinkHub.tsx       # 메인 포트폴리오 컴포넌트 (프로필, 링크)
-│   ├── DetectorPage.tsx  # 검출기 인터랙티브 교육 컴포넌트
-│   ├── footer.tsx        # 글로벌 푸터 (파형 SVG + 소셜 아이콘 + 저작권) — layout.tsx에서 렌더
-│   ├── icons.tsx         # SVG 아이콘 모음 — LinkIcon (플랫폼), UI 아이콘 (Sun/Moon/Atom/Arrow/Plus/User/Heart/Frown/List/Target/Star 등)
 │   └── effects/
 │       ├── ParticleField.tsx  # Canvas 파티클 시스템 (트랙 분출 + 붕괴 애니메이션)
 │       ├── PCBBackground.tsx  # Canvas PCB 회로 배경 애니메이션
 │       └── FXPanel.tsx        # 이펙트 제어 패널 (FAB + 슬라이더)
 ├── lib/
 │   ├── data.ts              # 콘텐츠 중앙 관리 (링크, 프로필, 소셜, FX 기본값, about 객체)
-│   ├── blocks.tsx           # 블록카드 + DS 공용 컴포넌트 (아래 표 참고)
-│   ├── blocks.md            # blocks.tsx 사용 가이드 — 새 페이지 제작 시 참고
 │   ├── designsystem-data.ts # 디자인 시스템 뷰어 데이터 (색상·타이포·반지름 상수 + 타입)
 │   └── theme-context.tsx    # 전역 테마 상태 — ThemeProvider, useTheme (light/dark)
+├── design-system/
+│   ├── globals.css          # 디자인 토큰(:root) + 전체 레이아웃 스타일 + DS 유틸리티 클래스
+│   ├── fx.css               # 이펙트 패널 + 캔버스 오버레이 스타일
+│   ├── blocks.tsx           # 블록카드 + DS 공용 컴포넌트 (아래 표 참고)
+│   ├── blocks.md            # blocks.tsx 사용 가이드 — 새 페이지 제작 시 참고
+│   ├── navbar.tsx           # 상단 네비게이션 (모바일: 햄버거, 데스크탑: 메뉴 + 테마 토글)
+│   ├── ThemeToggle.tsx      # 재사용 가능한 테마 토글 버튼 (isDark + onToggle props)
+│   ├── footer.tsx           # 글로벌 푸터 (파형 SVG + 소셜 아이콘 + 저작권) — layout.tsx에서 렌더
+│   └── icons.tsx            # SVG 아이콘 모음 — LinkIcon (플랫폼), UI 아이콘 (Sun/Moon/Atom/Arrow/Plus/User/Heart/Frown/List/Target/Star 등)
 ├── public/               # 정적 자산 (캐릭터 이미지, .nojekyll)
 └── .github/workflows/
     └── nextjs.yml        # GitHub Pages 빌드·배포 워크플로우
@@ -75,10 +75,10 @@ isaac-fisica-kr/
 | 푸터 소셜 아이콘 | `lib/data.ts` → `footerSocials` 배열 |
 | 확장 슬롯 활성화 | `lib/data.ts` → `showSlots = true`로 변경 |
 | FX 이펙트 기본값 | `lib/data.ts` → `fxDefaults` |
-| 새 플랫폼 아이콘 추가 | `components/icons.tsx` → `LinkIcon` switch에 케이스 추가 |
-| Navbar 메뉴 항목 | `components/navbar.tsx` → `navItems` 배열 |
+| 새 플랫폼 아이콘 추가 | `design-system/icons.tsx` → `LinkIcon` switch에 케이스 추가 |
+| Navbar 메뉴 항목 | `design-system/navbar.tsx` → `navItems` 배열 |
 | About 블록 구성 변경 | `components/About.tsx` → `<BlockGrid>` 안의 블록 추가/제거 |
-| 새 블록 종류 추가 | `lib/blocks.tsx` → `<Block>` 셸로 새 프리셋 작성 |
+| 새 블록 종류 추가 | `design-system/blocks.tsx` → `<Block>` 셸로 새 프리셋 작성 |
 | DS 뷰어 색상·타이포 수치 | `lib/designsystem-data.ts` → `ACCENT_SWATCHES`, `SURFACE_SWATCHES`, `TYPE_SCALE`, `RADII` |
 
 ---
@@ -93,7 +93,7 @@ isaac-fisica-kr/
 - **다크 테마**: `[data-theme="dark"]` — `html` 요소에 적용되어 전역 토큰이 교체됩니다
 - Navbar 포함 모든 컴포넌트가 동일한 `:root` 토큰을 사용 (별도 다크 오버라이드 불필요)
 
-### 주요 CSS 변수 (토큰) — `app/globals.css` `:root`에 정의
+### 주요 CSS 변수 (토큰) — `design-system/globals.css` `:root`에 정의
 ```css
 --paper       /* 배경 */
 --paper-2     /* 보조 배경 (섹션 구분 등) */
@@ -115,7 +115,7 @@ isaac-fisica-kr/
 --grid-strong /* 배경 격자 (강조) */
 ```
 
-### 디자인 시스템 유틸리티 클래스 (`app/globals.css`)
+### 디자인 시스템 유틸리티 클래스 (`design-system/globals.css`)
 ```css
 .ds-card             /* 표준 카드 (--card 배경, 보더, 14px 라운드, 그림자) → DSCard 컴포넌트 */
 .ds-link-card        /* hover: translateY(-2px) + cyan ring + glow */
@@ -137,7 +137,6 @@ isaac-fisica-kr/
 
 ### 반응형 브레이크포인트
 - `720px`: Navbar 햄버거 메뉴 전환
-- `860px`: DetectorPage 레이아웃 전환 (사이드바 ↔ 스택)
 
 ---
 
@@ -178,12 +177,12 @@ npm run lint     # ESLint
 ## About 페이지 & 블록 시스템
 
 ### About 페이지 (`components/About.tsx`)
-- `lib/data.ts`의 `about` 객체에서 콘텐츠를 불러와 `lib/blocks.tsx` 프리셋으로 조립
+- `lib/data.ts`의 `about` 객체에서 콘텐츠를 불러와 `design-system/blocks.tsx` 프리셋으로 조립
 - `.hub` 컨테이너 구조 사용 (테마는 `:root` 토큰으로 자동 반영, `useTheme` 불필요)
 - 헤더: 캐릭터 이미지 + 오실로스코프 파형 SVG 구분선 + PCB 트레이스 장식 SVG
 - 현재 블록 구성: `ProfileBlock` → `TagBlock(LIKES)` → `TagBlock(DISLIKES)` → `TextBlock(AIMS)` → `TextBlock(RESEARCH)`
 
-### 블록카드 시스템 (`lib/blocks.tsx`)
+### 블록카드 시스템 (`design-system/blocks.tsx`)
 프리셋 컴포넌트를 `<BlockGrid>` 안에 배치해 About 등 페이지를 조립하는 구조.
 
 | 컴포넌트 | 역할 | 사용처 |
@@ -202,34 +201,9 @@ npm run lint     # ESLint
 | `DSCardLabel` | 모노 소문자 캡션 (`style` prop 지원) | DS 뷰어 |
 
 - **accent 옵션**: `'cyan'` | `'copper'` | `'mustard'` | `'accent'`
-- 블록 스타일: `app/globals.css`의 `.block-*` 클래스
-- DS 컴포넌트 스타일: `app/globals.css`의 `.ds-*` 클래스
-- 상세 사용법: `lib/blocks.md` / 실제 예시: `/example` 페이지
-
----
-
-## DetectorPage 구조
-
-입자 검출기 원리를 9단계로 설명하는 인터랙티브 교육 도구.
-
-**시뮬레이션 단계:**
-1. INJECTION — 입자 주입
-2. TRACKER — 궤적 추적
-3. MAGNETIC FIELD — 자기장
-4. HITS — 검출기 히트
-5. TOF — 비행 시간 측정
-6. CALORIMETER — 에너지 측정
-7. LIMITS — 검출 한계
-8. CIRCLE FIT — 원 피팅으로 운동량 측정
-9. VERTEX — 꼭짓점 재구성
-
-**물리 계산:**
-- 곡률 반경: `R = pT / (0.2998 × B)` (pT: 횡단 운동량, B: 자기장)
-- β (빛 속도 대비 속도): `β = p / E`
-- 비행 시간: TOF 검출기 도착 시간
-- EMCAL/HCAL 에너지 침적
-
-**입자 타입:** e⁻, μ⁻, π⁺, π⁻, K⁺
+- 블록 스타일: `design-system/globals.css`의 `.block-*` 클래스
+- DS 컴포넌트 스타일: `design-system/globals.css`의 `.ds-*` 클래스
+- 상세 사용법: `design-system/blocks.md` / 실제 예시: `/example` 페이지
 
 ---
 
@@ -247,13 +221,13 @@ export const links: LinkItem[] = [
 
 ### 새 아이콘 추가
 ```tsx
-// components/icons.tsx — LinkIcon의 switch에 추가
+// design-system/icons.tsx — LinkIcon의 switch에 추가
 case 'newicon': return <svg>...</svg>;
 ```
 
 ### 테마별 스타일 추가
 ```css
-/* app/globals.css — :root 토큰이 전역으로 적용되므로 별도 다크 오버라이드 불필요 */
+/* design-system/globals.css — :root 토큰이 전역으로 적용되므로 별도 다크 오버라이드 불필요 */
 .my-element { color: var(--ink); }
 
 /* 다크 모드에서만 다른 값이 필요한 경우 */
@@ -265,7 +239,7 @@ case 'newicon': return <svg>...</svg>;
 // 페이지 자체에서 라이트/다크를 독립 제어할 때
 'use client';
 import { useState } from 'react';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { ThemeToggle } from '@/design-system/ThemeToggle';
 
 const [theme, setTheme] = useState<'light' | 'dark'>('light');
 const isDark = theme === 'dark';
@@ -277,16 +251,16 @@ const isDark = theme === 'dark';
 ```
 
 ### 디자인 시스템 뷰어 (`/designsystem`)
-- `app/designsystem/page.tsx` 단일 파일. 별도 레이아웃·CSS 없음 — 루트 `globals.css` 토큰을 그대로 사용
+- `app/designsystem/page.tsx` 단일 파일. 별도 레이아웃·CSS 없음 — `design-system/globals.css` 토큰을 그대로 사용
 - 페이지 자체에 로컬 `theme` state를 두어 전역 테마와 독립적으로 라이트/다크 전환 가능
 - 모든 컴포넌트는 라이브러리에서 import (페이지에 컴포넌트 정의 없음):
-  - `lib/blocks.tsx` → `DSCard`, `DSGrid`, `IconTile`, `DSSectionHead`, `DSCardLabel`
-  - `components/ThemeToggle.tsx` → 헤더 및 CONTROLS 데모에서 사용
-  - `components/icons.tsx` → `LinkIcon`, `ArrowIcon`
+  - `design-system/blocks.tsx` → `DSCard`, `DSGrid`, `IconTile`, `DSSectionHead`, `DSCardLabel`
+  - `design-system/ThemeToggle.tsx` → 헤더 및 CONTROLS 데모에서 사용
+  - `design-system/icons.tsx` → `LinkIcon`, `ArrowIcon`
   - `lib/designsystem-data.ts` → `ACCENT_SWATCHES`, `SURFACE_SWATCHES`, `TYPE_SCALE`, `RADII`
 - 카드는 `DSCard`, 그리드는 `DSGrid`를 사용 — 인라인 `cardStyle` 객체 없음
 
-### ThemeToggle (`components/ThemeToggle.tsx`)
+### ThemeToggle (`design-system/ThemeToggle.tsx`)
 - `isDark: boolean` + `onToggle: () => void` props만 받는 순수 UI 컴포넌트
 - 글로벌 `useTheme()` 없이 어디서든 독립적으로 사용 가능 (로컬 상태 주입)
 - 기존 CSS 클래스(`.toggle`, `.toggle__icon`, `.toggle__knob`) 재사용 — 별도 스타일 없음
