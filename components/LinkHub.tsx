@@ -18,7 +18,7 @@ import {
 import PCBBackground from './effects/PCBBackground';
 import ParticleField, { type ParticleFieldHandle } from './effects/ParticleField';
 import FXPanel, { type FXState } from './effects/FXPanel';
-import { useTheme } from '@/lib/theme-context';
+import { useTheme } from '@/design-system/theme-context';
 
 export default function LinkHub() {
   const { isDark } = useTheme();

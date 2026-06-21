@@ -4,7 +4,7 @@ import type { IconName } from '@/lib/data';
 import { LinkIcon, ArrowIcon, all_icons } from '@/design-system/icons';
 import { IconTile, DSSectionHead, DSCardLabel, DSCard, DSGrid } from '@/design-system/blocks';
 import { ThemeToggle } from '@/design-system/ThemeToggle';
-import { useTheme } from '@/lib/theme-context';
+import { useTheme } from '@/design-system/theme-context';
 import {
   ACCENT_SWATCHES,
   SURFACE_SWATCHES,
