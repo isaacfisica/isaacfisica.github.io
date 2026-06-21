@@ -132,6 +132,7 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
+  margin-left: auto;
 }
 .nav__link {
   font-family: 'IBM Plex Mono', monospace;
@@ -206,14 +207,17 @@ body {
 
 /* 모바일 드롭다운 */
 .nav__mobile {
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 4px;
   padding: 8px 16px 16px;
   border-bottom: 1px solid var(--border);
   background: color-mix(in srgb, var(--paper) 96%, transparent);
-  animation: nav-drop 0.22s ease;
   transition: background 0.45s ease, border-color 0.45s ease;
+}
+.nav__mobile.is-open {
+  display: flex;
+  animation: nav-drop 0.22s ease;
 }
 @keyframes nav-drop {
   from {
@@ -242,6 +246,11 @@ body {
   margin: 6px 0 0;
   text-align: center;
   padding: 12px;
+}
+
+/* 네비게이션 바 내 모바일 전용 테마 토글 */
+.nav__toggle-mobile {
+  display: none;
 }
 
 /* 모바일 드롭다운 토글 버튼 */
@@ -278,7 +287,7 @@ body {
   box-shadow: 0 0 10px var(--glow), 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 
-/* 좁은 화면: 메뉴 숨기고 햄버거 노출 */
+/* 좁은 화면: 데스크탑 메뉴 숨기고 햄버거+모바일 토글 노출 */
 @media (max-width: 720px) {
   .nav__menu {
     display: none;
@@ -286,11 +295,9 @@ body {
   .nav__burger {
     display: flex;
   }
-}
-/* 넓은 화면: 모바일 드롭다운 강제 숨김 */
-@media (min-width: 721px) {
-  .nav__mobile {
-    display: none !important;
+  .nav__toggle-mobile {
+    display: flex;
+    margin-left: auto;
   }
 }
 

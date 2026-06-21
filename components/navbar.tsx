@@ -64,6 +64,25 @@ export default function Navbar() {
           </button>
         </nav>
 
+        {/* 모바일 전용 테마 토글 (햄버거 왼쪽) */}
+        <button
+          type="button"
+          role="switch"
+          aria-checked={isDark}
+          aria-label={themeLabel}
+          title={themeLabel}
+          className="nav__toggle-mobile toggle"
+          onClick={() => setTheme(isDark ? 'light' : 'dark')}
+        >
+          <span className="toggle__icon toggle__icon--sun">
+            <SunIcon />
+          </span>
+          <span className="toggle__icon toggle__icon--moon">
+            <MoonIcon />
+          </span>
+          <span className="toggle__knob" />
+        </button>
+
         {/* 햄버거 버튼 (좁은 화면) */}
         <button
           type="button"
@@ -83,7 +102,6 @@ export default function Navbar() {
       <div
         id="nav-mobile"
         className={'nav__mobile' + (open ? ' is-open' : '')}
-        hidden={!open}
       >
         {navItems.map((item) => (
           <a
@@ -95,19 +113,6 @@ export default function Navbar() {
             {item.label}
           </a>
         ))}
-        {/* 모바일에서도 테마 토글 */}
-        <button
-          type="button"
-          role="switch"
-          aria-checked={isDark}
-          aria-label={themeLabel}
-          title={themeLabel}
-          className="nav__mlink nav__mlink--toggle"
-          onClick={() => { setTheme(isDark ? 'light' : 'dark'); setOpen(false); }}
-        >
-          {isDark ? <SunIcon /> : <MoonIcon />}
-          <span>{isDark ? '라이트 모드' : '다크 모드'}</span>
-        </button>
       </div>
     </header>
   );
