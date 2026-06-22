@@ -10,7 +10,9 @@
  *  ▷ showSlots=false  로 두면 확장 슬롯 섹션이 통째로 숨겨집니다.
  */
 
-export type IconName = 'youtube' | 'stream' | 'x' | 'twitter' | 'discord' | 'support';
+// export type IconName = 'youtube' | 'stream' | 'x' | 'twitter' | 'discord' | 'support';
+
+import type { IconName } from '@/design-system/icons';
 
 export interface LinkItem {
   icon: IconName;
@@ -36,6 +38,7 @@ export const links: LinkItem[] = [
   { icon: 'stream', label: '라이브 스트리밍', sub: 'CHZZK', url: 'https://chzzk.naver.com/live/271d3c1c873ad6e013f2524ea705045c' }, // 여기에 링크
   { icon: 'twitter', label: 'Twitter (X)', sub: '@isaacfisica_kr', url: 'https://x.com/isaacfisica_kr' }, // 여기에 링크
   { icon: 'youtube', label: 'YouTube', sub: 'Youtube', url: 'https://www.youtube.com/@isaac.fisica' }, // 여기에 링크
+  { icon: 'blog', label: '블로그', sub: 'Tistory', url: 'https://isaacfisica.tistory.com' }, // 여기에 링크
   //   //{ icon: 'discord', label: 'Discord', sub: '커뮤니티 서버', url: '#' }, // 여기에 링크
   //{ icon: 'support', label: '후원 · 멤버십', sub: '채널 멤버십 / 슈퍼챗', url: '#' }, // 여기에 링크
 ];
