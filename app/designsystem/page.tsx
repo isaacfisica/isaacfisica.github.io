@@ -1,6 +1,6 @@
 'use client';
 
-import type { IconName } from '@/lib/data';
+import type { IconName } from '@/design-system/icons';
 import { LinkIcon, ArrowIcon, all_icons } from '@/design-system/icons';
 import { IconTile, DSSectionHead, DSCardLabel, DSCard, DSGrid } from '@/design-system/blocks';
 import { ThemeToggle } from '@/design-system/ThemeToggle';
