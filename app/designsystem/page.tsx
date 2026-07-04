@@ -12,8 +12,8 @@ import {
   RADII,
 } from '@/lib/designsystem-data';
 
-const MONO = "'IBM Plex Mono',monospace";
-const SORA = "'Sora','Noto Sans KR',sans-serif";
+const MONO = 'var(--font-plex-mono),monospace';
+const SORA = 'var(--font-sora),var(--font-noto-kr),sans-serif';
 
 const ICON_NAMES: IconName[] = ['youtube', 'stream', 'twitter', 'x', 'discord', 'support'];
 
@@ -27,7 +27,7 @@ export default function DesignSystemPage() {
         position: 'relative',
         minHeight: '100vh',
         color: 'var(--ink)',
-        fontFamily: "'Noto Sans KR',system-ui,sans-serif",
+        fontFamily: 'var(--font-noto-kr),system-ui,sans-serif',
         backgroundColor: 'var(--paper)',
         backgroundImage:
           'linear-gradient(var(--grid) 1px,transparent 1px), linear-gradient(90deg,var(--grid) 1px,transparent 1px), linear-gradient(var(--grid-strong) 1px,transparent 1px), linear-gradient(90deg,var(--grid-strong) 1px,transparent 1px)',
@@ -177,7 +177,7 @@ export default function DesignSystemPage() {
               <DSCardLabel>DISPLAY · 제목</DSCardLabel>
               <div
                 style={{
-                  fontFamily: "'Sora',sans-serif",
+                  fontFamily: 'var(--font-sora),sans-serif',
                   fontWeight: 700,
                   fontSize: 40,
                   lineHeight: 1,
@@ -195,7 +195,7 @@ export default function DesignSystemPage() {
               <DSCardLabel>BODY · 본문</DSCardLabel>
               <div
                 style={{
-                  fontFamily: "'Noto Sans KR',sans-serif",
+                  fontFamily: 'var(--font-noto-kr),sans-serif',
                   fontWeight: 700,
                   fontSize: 36,
                   lineHeight: 1,

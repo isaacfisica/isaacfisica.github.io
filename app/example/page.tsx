@@ -168,7 +168,7 @@ export default function ExamplePage() {
         </div>
 
         <footer style={{ marginTop: 48, paddingTop: 20, borderTop: '1px solid var(--border)' }}>
-          <p style={{ color: 'var(--ink-faint)', fontSize: 12, fontFamily: "'IBM Plex Mono',monospace" }}>
+          <p style={{ color: 'var(--ink-faint)', fontSize: 12, fontFamily: 'var(--font-plex-mono),monospace' }}>
             blocks.tsx 예시 페이지 — design-system/blocks.md 참고
           </p>
         </footer>

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
+import { Sora, Noto_Sans_KR, IBM_Plex_Mono } from 'next/font/google';
 import '@/design-system/globals.css';
 import '@/design-system/fx.css';
 import Navbar from '@/design-system/navbar';
@@ -7,6 +8,27 @@ import { ThemeProvider } from '@/design-system/theme-context';
 import Footer from '@/design-system/footer';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
+/* next/font — 빌드 시 셀프호스팅 (render-blocking 없음, CJK는 unicode-range 슬라이스로 분할 로드)
+   CSS에서는 var(--font-sora) / var(--font-noto-kr) / var(--font-plex-mono)로 참조 */
+const sora = Sora({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+  variable: '--font-sora',
+});
+const notoSansKr = Noto_Sans_KR({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
+  variable: '--font-noto-kr',
+});
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  display: 'swap',
+  variable: '--font-plex-mono',
+});
 
 export const metadata: Metadata = {
   title: '이삭 ISAAC',
@@ -26,16 +48,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* 한글(Noto Sans KR)은 unicode-range로 안전하게 로드 — CJK 서브셋 이슈 회피 */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="ko" className={`${sora.variable} ${notoSansKr.variable} ${plexMono.variable}`}>
       <body>
         <ThemeProvider>
           <Navbar />

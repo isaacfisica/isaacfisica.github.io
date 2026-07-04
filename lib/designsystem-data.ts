@@ -44,11 +44,11 @@ export const SURFACE_SWATCHES: SurfaceSwatch[] = [
 ];
 
 export const TYPE_SCALE: TypeScaleItem[] = [
-  { meta: 'Sora 700 · 40', font: "'Sora',sans-serif", weight: 700, px: '40px', sample: '검출기는 입자를 본다' },
-  { meta: 'Sora 700 · 31', font: "'Sora',sans-serif", weight: 700, px: '31px', sample: '이삭 ISAAC' },
-  { meta: 'Sora 600 · 16', font: "'Sora',sans-serif", weight: 600, px: '16px', sample: 'YouTube 메인 채널' },
-  { meta: 'Noto 400 · 15', font: "'Noto Sans KR',sans-serif", weight: 400, px: '15px', sample: '이탈리아에서 입자 부수는 물리 VTuber' },
-  { meta: 'Mono 500 · 11', font: "'IBM Plex Mono',monospace", weight: 500, px: '11px', sample: 'REC · ISAAC-2026' },
+  { meta: 'Sora 700 · 40', font: 'var(--font-sora),sans-serif', weight: 700, px: '40px', sample: '검출기는 입자를 본다' },
+  { meta: 'Sora 700 · 31', font: 'var(--font-sora),sans-serif', weight: 700, px: '31px', sample: '이삭 ISAAC' },
+  { meta: 'Sora 600 · 16', font: 'var(--font-sora),sans-serif', weight: 600, px: '16px', sample: 'YouTube 메인 채널' },
+  { meta: 'Noto 400 · 15', font: 'var(--font-noto-kr),sans-serif', weight: 400, px: '15px', sample: '이탈리아에서 입자 부수는 물리 VTuber' },
+  { meta: 'Mono 500 · 11', font: 'var(--font-plex-mono),monospace', weight: 500, px: '11px', sample: 'REC · ISAAC-2026' },
 ];
 
 export const RADII: RadiusItem[] = [
