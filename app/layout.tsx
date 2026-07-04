@@ -30,13 +30,31 @@ const plexMono = IBM_Plex_Mono({
   variable: '--font-plex-mono',
 });
 
+const SITE_URL = 'https://isaacfisica.github.io';
+const TITLE = '이삭 ISAAC';
+const DESCRIPTION = '이탈리아 물리학과 대학원생; 실험 핵·입자물리학; 국제공동연구';
+
 export const metadata: Metadata = {
-  title: '이삭 ISAAC',
-  description: '이탈리아 물리학과 대학원생; 실험 핵·입자물리학; 국제공동연구',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: `%s · ${TITLE}`,
+  },
+  description: DESCRIPTION,
   openGraph: {
-    title: '이삭 ISAAC',
-    description: '이탈리아 물리학과 대학원생; 실험 핵·입자물리학; 국제공동연구 ',
+    title: TITLE,
+    description: DESCRIPTION,
+    url: '/',
+    siteName: TITLE,
+    locale: 'ko_KR',
     type: 'website',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ['/og.png'],
   },
 };
 
