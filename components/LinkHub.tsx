@@ -6,6 +6,10 @@ import {
   slots,
   profile,
   showSlots,
+  featured,
+  showFeatured,
+  schedule,
+  showSchedule,
   fxDefaults,
 } from '@/lib/data';
 import {
@@ -14,6 +18,7 @@ import {
   ArrowIcon,
   EmailIcon,
   PlusIcon,
+  CalendarIcon,
 } from '@/design-system/icons';
 import PCBBackground from './effects/PCBBackground';
 import ParticleField, { type ParticleFieldHandle } from './effects/ParticleField';
@@ -176,6 +181,66 @@ export default function LinkHub() {
               {/* </span> */}
             </div>
         </div>
+
+        {/* ───────── 추천 콘텐츠 (lib/data.tsx: featured / showFeatured) ───────── */}
+        {showFeatured && featured.length > 0 && (
+          <div>
+            <div className="section-head">
+              <span>FEATURED · 추천 콘텐츠</span>
+              <span className="line" />
+            </div>
+            <div className="links">
+              {featured.map((item) => (
+                <a
+                  className="link-card"
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={item.label}
+                >
+                  <span className="link-card__tile">
+                    <span className="dot" />
+                    <LinkIcon name={item.icon} />
+                  </span>
+                  <span className="link-card__text">
+                    <span className="link-card__label">{item.label}</span>
+                    <span className="link-card__sub">{item.sub}</span>
+                  </span>
+                  <span className="link-card__arrow">
+                    <ArrowIcon />
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ───────── 방송 스케줄 (lib/data.tsx: schedule / showSchedule) ───────── */}
+        {showSchedule && schedule.length > 0 && (
+          <div>
+            <div className="section-head">
+              <span>SCHEDULE · 방송 스케줄</span>
+              <span className="line" />
+            </div>
+            <div className="slots">
+              {schedule.map((s) => (
+                <div className="slot" key={`${s.day}-${s.time}-${s.label}`}>
+                  <div className="slot__head">
+                    <span className="slot__icon">
+                      <CalendarIcon />
+                    </span>
+                    <span className="slot__label">{s.label}</span>
+                  </div>
+                  <span className="slot__note">
+                    <span className="ndot" />
+                    {s.day} · {s.time}
+                    {s.note ? ` · ${s.note}` : ''}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* ───────── 확장 슬롯 (준비 중) ───────── */}
         {showSlots && (
