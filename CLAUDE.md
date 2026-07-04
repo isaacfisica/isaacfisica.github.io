@@ -26,28 +26,33 @@
 ```
 isaac-fisica-kr/
 ├── app/
-│   ├── layout.tsx        # 루트 레이아웃 (GA 스크립트, 폰트, Navbar 포함)
+│   ├── layout.tsx        # 루트 레이아웃 (GA 스크립트, next/font, OG 메타데이터, Navbar 포함)
 │   ├── page.tsx          # 홈 → LinkHub 컴포넌트 렌더
+│   ├── icon.png          # 파비콘 (Next 파일 컨벤션 — 자동으로 <link> 생성)
+│   ├── apple-icon.png    # iOS 홈화면 아이콘 (파일 컨벤션)
+│   ├── not-found.tsx     # 404 페이지 — 정적 export 시 out/404.html (GitHub Pages가 자동 사용)
+│   ├── sitemap.ts        # sitemap.xml 생성 (정적 export)
 │   ├── about/
-│   │   └── page.tsx      # /about 라우트 → About 컴포넌트 렌더
+│   │   └── page.tsx      # /about 라우트 → About 컴포넌트 렌더 (+ metadata)
 │   ├── faq/
-│   │   └── page.tsx      # /faq 라우트 — 자주 묻는 질문 (블록카드 시스템 사용)
+│   │   └── page.tsx      # /faq 라우트 — lib/data.tsx의 faq 배열을 FaqBlock으로 렌더
 │   ├── designsystem/
+│   │   ├── layout.tsx    # metadata 전용 레이아웃 (page가 'use client'라 분리)
 │   │   └── page.tsx      # /designsystem 라우트 — 색상·타이포·컴포넌트 명세 뷰어
 │   └── example/
 │       └── page.tsx      # /example 라우트 — blocks.tsx 모든 컴포넌트 사용 예시 (개발 참고용)
 ├── components/
 │   ├── About.tsx         # /about 페이지 — 블록카드 그리드 자기소개
-│   ├── LinkHub.tsx       # 메인 포트폴리오 컴포넌트 (프로필, 링크)
+│   ├── LinkHub.tsx       # 메인 포트폴리오 컴포넌트 (프로필, 링크, FEATURED/SCHEDULE 섹션)
 │   └── effects/
 │       ├── ParticleField.tsx  # Canvas 파티클 시스템 (트랙 분출 + 붕괴 애니메이션)
 │       ├── PCBBackground.tsx  # Canvas PCB 회로 배경 애니메이션
 │       └── FXPanel.tsx        # 이펙트 제어 패널 (FAB + 슬라이더)
 ├── lib/
-│   ├── data.ts              # 콘텐츠 중앙 관리 (링크, 프로필, 소셜, FX 기본값, about 객체)
+│   ├── data.tsx             # 콘텐츠 중앙 관리 (링크, 프로필, 소셜, FAQ, 추천 콘텐츠, 스케줄, FX 기본값, about 객체)
 │   ├── designsystem-data.ts # 디자인 시스템 뷰어 데이터 (색상·타이포·반지름 상수 + 타입)
 │   └── theme-context.tsx    # 전역 테마 상태 — ThemeProvider, useTheme (light/dark)
-├── design-system/
+├── design-system/           # ⚠ git 서브모듈 (github.com/isaacfisica/design-system) — 수정 시 서브모듈에서 커밋 필요
 │   ├── globals.css          # 디자인 토큰(:root) + 전체 레이아웃 스타일 + DS 유틸리티 클래스
 │   ├── fx.css               # 이펙트 패널 + 캔버스 오버레이 스타일
 │   ├── blocks.tsx           # 블록카드 + DS 공용 컴포넌트 (아래 표 참고)
@@ -56,7 +61,7 @@ isaac-fisica-kr/
 │   ├── ThemeToggle.tsx      # 재사용 가능한 테마 토글 버튼 (isDark + onToggle props)
 │   ├── footer.tsx           # 글로벌 푸터 (파형 SVG + 소셜 아이콘 + 저작권) — layout.tsx에서 렌더
 │   └── icons.tsx            # SVG 아이콘 모음 — LinkIcon (플랫폼), UI 아이콘 (Sun/Moon/Atom/Arrow/Plus/User/Heart/Frown/List/Target/Star 등)
-├── public/               # 정적 자산 (캐릭터 이미지, .nojekyll)
+├── public/               # 정적 자산 (캐릭터 이미지, og.png, robots.txt, .nojekyll)
 └── .github/workflows/
     └── nextjs.yml        # GitHub Pages 빌드·배포 워크플로우
 ```
@@ -65,16 +70,19 @@ isaac-fisica-kr/
 
 ## 콘텐츠 수정 위치
 
-**콘텐츠 변경은 대부분 `lib/data.ts` 한 파일에서 완결됩니다.**
+**콘텐츠 변경은 대부분 `lib/data.tsx` 한 파일에서 완결됩니다.** (FAQ에 JSX를 쓰기 위해 `.tsx`)
 
 | 수정 항목 | 파일 |
 |-----------|------|
-| 링크 추가/수정/삭제 | `lib/data.ts` → `links` 배열 |
-| 프로필 이름/소개 | `lib/data.ts` → `profile` 객체 |
-| About 페이지 콘텐츠 | `lib/data.ts` → `about` 객체 (quote, profile, likes, dislikes, aims, research) |
-| 푸터 소셜 아이콘 | `lib/data.ts` → `footerSocials` 배열 |
-| 확장 슬롯 활성화 | `lib/data.ts` → `showSlots = true`로 변경 |
-| FX 이펙트 기본값 | `lib/data.ts` → `fxDefaults` |
+| 링크 추가/수정/삭제 | `lib/data.tsx` → `links` 배열 |
+| 프로필 이름/소개 | `lib/data.tsx` → `profile` 객체 |
+| About 페이지 콘텐츠 | `lib/data.tsx` → `about` 객체 (quote, profile, likes, dislikes, aims, research) |
+| FAQ 문답 추가/수정 | `lib/data.tsx` → `faq` 배열 (답변에 JSX 사용 가능) |
+| 추천 콘텐츠 (메인 FEATURED) | `lib/data.tsx` → `featured` 배열 + `showFeatured` 플래그 |
+| 방송 스케줄 (메인 SCHEDULE) | `lib/data.tsx` → `schedule` 배열 + `showSchedule = true`로 활성화 |
+| 푸터 소셜 아이콘 | `lib/data.tsx` → `footerSocials` 배열 |
+| 확장 슬롯 활성화 | `lib/data.tsx` → `showSlots = true`로 변경 |
+| FX 이펙트 기본값 | `lib/data.tsx` → `fxDefaults` |
 | 새 플랫폼 아이콘 추가 | `design-system/icons.tsx` → `LinkIcon` switch에 케이스 추가 |
 | Navbar 메뉴 항목 | `design-system/navbar.tsx` → `navItems` 배열 |
 | About 블록 구성 변경 | `components/About.tsx` → `<BlockGrid>` 안의 블록 추가/제거 |
@@ -131,9 +139,11 @@ isaac-fisica-kr/
 ```
 
 ### 폰트
-- `Sora` (헤딩, 500/600/700)
-- `Noto Sans KR` (한국어 본문, 400/500/700)
-- `IBM Plex Mono` (기술적 UI 요소, 400/500/600)
+`next/font/google`로 빌드 시 셀프호스팅 (`app/layout.tsx`에서 로드, render-blocking 없음).
+CSS에서는 리터럴 폰트명 대신 CSS 변수로 참조합니다:
+- `var(--font-sora)` — Sora (헤딩, 500/600/700)
+- `var(--font-noto-kr)` — Noto Sans KR (한국어 본문, 400/500/700)
+- `var(--font-plex-mono)` — IBM Plex Mono (기술적 UI 요소, 400/500/600)
 
 ### 반응형 브레이크포인트
 - `720px`: Navbar 햄버거 메뉴 전환
@@ -177,7 +187,7 @@ npm run lint     # ESLint
 ## About 페이지 & 블록 시스템
 
 ### About 페이지 (`components/About.tsx`)
-- `lib/data.ts`의 `about` 객체에서 콘텐츠를 불러와 `design-system/blocks.tsx` 프리셋으로 조립
+- `lib/data.tsx`의 `about` 객체에서 콘텐츠를 불러와 `design-system/blocks.tsx` 프리셋으로 조립
 - `.hub` 컨테이너 구조 사용 (테마는 `:root` 토큰으로 자동 반영, `useTheme` 불필요)
 - 헤더: 캐릭터 이미지 + 오실로스코프 파형 SVG 구분선 + PCB 트레이스 장식 SVG
 - 현재 블록 구성: `ProfileBlock` → `TagBlock(LIKES)` → `TagBlock(DISLIKES)` → `TextBlock(AIMS)` → `TextBlock(RESEARCH)`
@@ -193,6 +203,7 @@ npm run lint     # ESLint
 | `ProfileBlock` | key/value 테이블 (전체 너비) | About |
 | `TagBlock` | 태그 묶음 (LIKES/DISLIKES 등, 절반 너비 기본) | About |
 | `TextBlock` | 긴 본문 텍스트 (전체 너비 기본) | About |
+| `FaqBlock` | FAQ 문답 — 질문(강조) + 답변 본문 (전체 너비 기본) | FAQ |
 | `EmptyBlock` | 자리표시 점선 카드 | About |
 | `DSCard` | 표준 카드 컨테이너 (`.ds-card` CSS) — `cardStyle` 대체 | DS 뷰어, 새 페이지 |
 | `DSGrid` | 반응형 그리드 (cols: 2\|3\|4, `.ds-grid-N` CSS) | DS 뷰어, 새 페이지 |
@@ -211,7 +222,7 @@ npm run lint     # ESLint
 
 ### 새 링크 추가
 ```ts
-// lib/data.ts
+// lib/data.tsx
 export const links: LinkItem[] = [
   { icon: 'youtube', label: '유튜브', sub: '@isaac.fisica', url: 'https://...' },
   // 새 항목 추가:
