@@ -41,6 +41,8 @@ export const links: LinkItem[] = [
   { icon: 'twitter', label: 'Twitter (X)', sub: '@isaacfisica_kr', url: 'https://x.com/isaacfisica_kr' }, // 여기에 링크
   { icon: 'youtube', label: 'YouTube', sub: 'Youtube', url: 'https://www.youtube.com/@isaac.fisica' }, // 여기에 링크
   { icon: 'blog', label: '블로그', sub: 'Tistory', url: 'https://isaacfisica.tistory.com' }, // 여기에 링크
+  { icon: 'blog', label: '스핀스핀', sub: 'SpinSpin', url: 'https://spin-spin.com/isaac' },
+  { icon: 'blog', label: '버튜버학회 상담실', sub: 'OfficeHours Vtuber Academia', url: 'https://officehours.vtuberacademia.kr/v/isaac' },
   //   //{ icon: 'discord', label: 'Discord', sub: '커뮤니티 서버', url: '#' }, // 여기에 링크
   //{ icon: 'support', label: '후원 · 멤버십', sub: '채널 멤버십 / 슈퍼챗', url: '#' }, // 여기에 링크
 ];
