@@ -92,6 +92,7 @@ export interface FeaturedItem {
 export const showFeatured = true;
 
 export const featured: FeaturedItem[] = [
+  { icon: 'blog', label: '이탈리아 박사과정 유학 가이드', sub: '2026.11 최초작성, 수시로 수정', url: ' https://isaacfisica.github.io/pdf-viewer/#q5kEBpRc1sNnULRcf-x7q1RXSVRURVIgQElTQUFDRklTSUNBX0tS' },
   { icon: 'blog', label: '개막장대수능모의고사', sub: 'Tistory · 2026.06', url: 'https://isaacfisica.tistory.com/2' },
 ];
 
